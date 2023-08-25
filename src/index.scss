@@ -26,8 +26,8 @@
   font-weight: normal;
   font-style: normal;
 }
-:root{
-  
+:root {
+  --primary: #00a9ac;
   --bg-color: #fafafa;
   --main-pen: #757575;
   --dark-gray: #585858;
@@ -45,7 +45,7 @@
   /* general */
   --box-shadow: 0px 4px 8px rgba(169, 169, 169, 0.11);
   --fast-transition: all 0.5s ease-out;
-  --carve: 8px;
+  --carve: 6px;
   --box-carve: 12px;
 }
 body {
@@ -54,4 +54,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-color);
+}
+* {
+  box-sizing: border-box;
 }
