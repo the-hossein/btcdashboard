@@ -1,0 +1,96 @@
+@use "./Font.scss";
+
+@mixin floor-padding {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  @media (max-width: 600px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 1400px) {
+    padding-left: 4rem;
+    padding-right: 4em;
+  }
+  @media (min-width: 1600px) {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
+@mixin primary-btn {
+  background-color: var(--primary);
+  color: white;
+  border-radius: var(--carve);
+  @include Font.Title300;
+  transition: all 0.5s ease-out;
+  display: block;
+  text-align: center;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  &:hover {
+    background-color: var(--primary_opacity80);
+  }
+}
+@mixin accent-btn {
+  background-color: var(--accent);
+  color: white;
+  border-radius: var(--carve);
+  @include Font.Title300;
+  transition: var(--fast-transition);
+  display: block;
+  text-align: center;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  &:hover {
+    background-color: var(--accent_opacity20);
+  }
+}
+@mixin border {
+  border-radius: var(--carve);
+  border: 1px solid var(--border-color);
+
+  //background-color: white;
+}
+@mixin secondery-btn {
+  padding: 1rem 1.25rem;
+  color: var(--main-pen);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: var(--fast-transition);
+  display: block;
+  text-align: center;
+  margin: 1rem auto;
+  width: max-content;
+  min-width: 100px;
+  &:hover {
+    border: 1px solid var(--light-gray);
+    background-color: var(--light-gray);
+    cursor: pointer;
+    color: var(--dark-gray);
+  }
+}
+@mixin border-card {
+  @include border;
+  padding: 0.5rem 1rem;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+@mixin lable-text {
+  color: var(--dark-gray);
+  margin: 0.5rem;
+  @include Font.Title100;
+}
+
+@mixin white_box {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  padding: 16px;
+  border-radius: var(--box-carve);
+}

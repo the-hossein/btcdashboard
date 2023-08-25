@@ -1,0 +1,30 @@
+//@use "../../assets/Font" ;
+
+.login_box {
+  width: 520px;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  height: 60vh;
+  border-radius: 8px;
+  padding: 1rem 2.5rem;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    
+    a {
+      display: flex;
+      align-items: center;
+      color: var(--main-pen);
+     // @include Font.SubTitle300;
+      &:hover{
+        color: var(--dark-gray);
+        cursor: pointer;
+      }
+    }
+    img {
+      width: 40px;
+      display: block;
+      margin: 0.5rem;
+    }
+  }
+}

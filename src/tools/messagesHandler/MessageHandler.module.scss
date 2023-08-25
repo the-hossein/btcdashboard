@@ -1,0 +1,20 @@
+@use "../../assets/Font.scss";
+
+.error_message {
+  display: flex;
+  justify-content: center;
+  width: max-content;
+  align-items: center;
+  margin: 0;
+  span {
+    //@include Font.Title100;
+    color: var(--error);
+    margin-left: 0.5rem;
+  }
+}
+
+.error_message.success_msg {
+  span {
+    color: var(--success);
+  }
+}
