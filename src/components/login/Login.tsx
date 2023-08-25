@@ -9,11 +9,15 @@ import { MessageType } from "../../viewModel/enums/MessageType";
 import { ArrowLeft } from "iconsax-react";
 import { useNavigate } from "react-router-dom";
 import TextField from "../../tools/fields/textField/TextField";
+import PasswordField from "../../tools/fields/passwordField/PasswordField";
+import Button from "../../tools/button/Button";
 const Login = () => {
   const [loading, setloading] = useState(false);
   const [messageType, setmessageType] = useState<MessageType | null>(null);
-  const [messageContent, setmessageContent] = useState("");
+  const [messageContent, setmessageContent] = useState<string>("");
+  const [password, setpassword] = useState<string>("");
   const navigate = useNavigate();
+  const CheckUserLogin = () => {};
   return (
     <BeforeLoginContainer>
       <AlignCenterContainer>
@@ -21,18 +25,22 @@ const Login = () => {
           <div className={Style.header}>
             <a onClick={() => navigate(-1)}>
               <ArrowLeft size="22" color="var(--main-pen)" />
-              Back
             </a>
+          </div>
+          <div className={Style.logo}>
             <img src={Logo} />
           </div>
 
           <MessageHandler type={messageType} message={messageContent} />
-          <TextField />
-          <div className={`${Style.login_btn}`}>
-            {/* <Button
-              text={translate("BUTTON.NEXT")}
-              clickMethod={checkUserNameClick}
-            /> */}
+
+          <div className={Style.login_fileds}>
+            <TextField placeHolder="UserName" />
+            <PasswordField
+              onChangeMethod={(e) => setpassword(e.target.value)}
+            />
+            <div className={`${Style.login_btn}`}>
+              <Button text={"Next"} clickMethod={CheckUserLogin} />
+            </div>
           </div>
         </div>
       </AlignCenterContainer>

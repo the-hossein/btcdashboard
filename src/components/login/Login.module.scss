@@ -1,4 +1,4 @@
-//@use "../../assets/Font" ;
+@use "../../assets/Font";
 
 .login_box {
   width: 520px;
@@ -10,21 +10,40 @@
   .header {
     display: flex;
     justify-content: space-between;
-    
+
     a {
       display: flex;
       align-items: center;
       color: var(--main-pen);
-     // @include Font.SubTitle300;
-      &:hover{
+      @include Font.SubTitle400;
+      &:hover {
         color: var(--dark-gray);
         cursor: pointer;
       }
     }
+  }
+  .logo {
+    width: 110px;
+    height: 110px;
+    margin: 1.5rem auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-color);
+    overflow: hidden;
     img {
-      width: 40px;
       display: block;
-      margin: 0.5rem;
+      margin: auto;
+      width: 70px;
+      height: 70px;
+    }
+  }
+  .login_fileds {
+    width: 80%;
+    margin: auto;
+    .login_btn{
+      margin-top: 3rem;
     }
   }
 }

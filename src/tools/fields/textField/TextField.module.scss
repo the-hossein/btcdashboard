@@ -1,26 +1,23 @@
-@use "../../../assets/Font";
-@use "../../../assets/Mix";
+@use "../../../assets/Mix.scss";
+@use "../../../assets/Font.scss";
 .asanBtc_field {
-  margin: 0.5rem auto;
+  margin: 0.25rem auto;
   div {
     display: flex;
     align-items: center;
-    padding: 0.25rem 0;
 
     svg {
       color: var(--border-color);
     }
     span {
-      //@include Mix.lable-text;
+      @include Mix.lable_text;
     }
   }
-  > input {
-    //@include Mix.border-card;
-    //border: none;
-    //box-shadow: var(--box-shadow);
-
+  input {
+    @include Mix.border;
     width: 100%;
-    height: 52px;
+    display: block;
+    @include Mix.filed-height;
     text-align: left;
     color: var(--main-pen);
 
@@ -28,13 +25,13 @@
       outline: 0px solid white;
     }
     &::placeholder {
-     // @include Font.Text300;
+      @include Font.Text300;
     }
   }
-  >input.error{
+  > input.error {
     border-color: var(--error);
   }
-  >input.success{
+  > input.success {
     border-color: var(--success);
   }
 }

@@ -21,7 +21,6 @@ const TextField: React.FC<Props> = ({
         <span>{lable}</span>
       </div>
       <input
-        //value={value}
         onChange={onChangeMethod}
         placeholder={placeHolder}
       />

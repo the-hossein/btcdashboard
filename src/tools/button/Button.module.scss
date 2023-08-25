@@ -1,0 +1,5 @@
+@use "../../assets//Mix.scss";
+.button {
+  @include Mix.primary-btn;
+  @include Mix.filed-height;
+}
