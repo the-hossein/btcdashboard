@@ -7,12 +7,14 @@ interface Props {
   lable?: string;
   onChangeMethod: (param?: any) => void;
   placeholder?: string;
+  value?: string;
 }
 const PasswordField: React.FC<Props> = ({
   icon,
   lable,
   onChangeMethod,
   placeholder = "Password",
+  value,
 }) => {
   const [passwordType, setpasswordType] = useState<PasswrodTypeEnum>(
     PasswrodTypeEnum.Password
@@ -35,15 +37,18 @@ const PasswordField: React.FC<Props> = ({
           type={passwordType}
           placeholder={placeholder}
           onChange={onChangeMethod}
+          value={value}
         />
 
-        <a onClick={ChangeFildType}>
-          {passwordType === PasswrodTypeEnum.Password ? (
-            <Eye size="20" color="var(--main-pen)" />
-          ) : (
-            <EyeSlash size="20" color="var(--main-pen)" />
-          )}
-        </a>
+        {value !== "" && (
+          <a onClick={ChangeFildType}>
+            {passwordType === PasswrodTypeEnum.Password ? (
+              <Eye size="20" color="var(--main-pen)" />
+            ) : (
+              <EyeSlash size="20" color="var(--main-pen)" />
+            )}
+          </a>
+        )}
       </div>
     </div>
   );

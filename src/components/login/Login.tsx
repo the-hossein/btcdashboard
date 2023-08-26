@@ -11,13 +11,26 @@ import { useNavigate } from "react-router-dom";
 import TextField from "../../tools/fields/textField/TextField";
 import PasswordField from "../../tools/fields/passwordField/PasswordField";
 import Button from "../../tools/button/Button";
+import { useSelector, useDispatch } from "react-redux";
+import { AppThunkDispatch, RootState } from "../../redux/store";
+import { fetcherLoginUser } from "../../redux/slices/userSlice";
+
 const Login = () => {
+  //! From Redux => user
+  const dispatch = useDispatch<AppThunkDispatch>();
+  const userAdmin = useSelector((state: RootState) => state.user);
+
   const [loading, setloading] = useState(false);
   const [messageType, setmessageType] = useState<MessageType | null>(null);
   const [messageContent, setmessageContent] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [password, setpassword] = useState<string>("");
   const navigate = useNavigate();
-  const CheckUserLogin = () => {};
+  const CheckUserLogin = () => {
+    //* authorization user
+    dispatch(fetcherLoginUser({ username: username, password: password }));
+  };
+
   return (
     <BeforeLoginContainer>
       <AlignCenterContainer>
@@ -34,12 +47,18 @@ const Login = () => {
           <MessageHandler type={messageType} message={messageContent} />
 
           <div className={Style.login_fileds}>
-            <TextField placeHolder="UserName" />
+            <TextField
+              placeHolder="نام کاربری"
+              value={username}
+              onChangeMethod={(e) => setUsername(e.target.value)}
+            />
             <PasswordField
+              placeholder={"کلمه عبور"}
               onChangeMethod={(e) => setpassword(e.target.value)}
+              value={password}
             />
             <div className={`${Style.login_btn}`}>
-              <Button text={"Next"} clickMethod={CheckUserLogin} />
+              <Button text={"ورود"} clickMethod={CheckUserLogin} />
             </div>
           </div>
         </div>
