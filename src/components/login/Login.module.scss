@@ -4,9 +4,10 @@
   width: 520px;
   background-color: white;
   box-shadow: var(--box-shadow);
-  height: 60vh;
+  height: auto;
+  min-height: 60vh;
   border-radius: 8px;
-  padding: 1rem 2.5rem;
+  padding: 1rem 2.5rem 3rem;
   .header {
     display: flex;
     justify-content: space-between;
