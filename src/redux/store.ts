@@ -15,7 +15,7 @@ export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
 // Create a type for thunk dispatch
-export type AppThunkDispatch = ThunkDispatch<RootState, any, AnyAction>;
+export type AppThunkDispatch<T> = ThunkDispatch<RootState, T, AnyAction>;
 
 export const useAppDispatch = () => useDispatch<typeof store.dispatch>()
 

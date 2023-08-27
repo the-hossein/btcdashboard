@@ -4,24 +4,24 @@ interface TokenObject {
 }
 
 
-export const saveTokenLocal: (token: string, expire: string) => void = (token, expire) => {
+export const SaveTokenLocal: (token: string, expire: string) => void = (token, expire) => {
     let obj: TokenObject = {
         token,
         expire,
     };
-    localStorage.setItem("UTA", JSON.stringify(obj));
+    localStorage.setItem("UserToken", JSON.stringify(obj));
 };
 
-export const deleteTokenLocal: () => void = () => {
-    localStorage.removeItem("UTA");
+export const DeleteTokenLocal: () => void = () => {
+    localStorage.removeItem("UserToken");
 };
 
 
-export const getTokenLocal: () => false | string = () => {
-    if (localStorage.getItem("UTA") == null) {
+export const GetTokenLocal: () => false | string = () => {
+    if (localStorage.getItem("UserToken") == null) {
         return false;
     } else {
-        const localValue: string | null = localStorage.getItem("UTA");
+        const localValue: string | null = localStorage.getItem("UserToken");
         let obj;
 
         if (localValue !== null) {
@@ -34,7 +34,7 @@ export const getTokenLocal: () => false | string = () => {
         if (expireDate > nowDate) {
             return obj.token;
         } else {
-            deleteTokenLocal();
+            DeleteTokenLocal();
             return false;
         }
     }

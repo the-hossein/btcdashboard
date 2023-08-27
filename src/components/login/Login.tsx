@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { BeforeLoginContainer } from "../../tools/container/beforeLoginContainer.tsx/Container";
 import { AlignCenterContainer } from "../../tools/container/customeContainer/AlignCenterContainer";
 import { CircularProgress } from "@mui/material";
@@ -12,12 +12,16 @@ import TextField from "../../tools/fields/textField/TextField";
 import PasswordField from "../../tools/fields/passwordField/PasswordField";
 import Button from "../../tools/button/Button";
 import { useSelector, useDispatch } from "react-redux";
-import { AppThunkDispatch, RootState } from "../../redux/store";
-import { fetcherLoginUser } from "../../redux/slices/userSlice";
+import { RootState } from "../../redux/store";
+import { PlaceHolderContent } from "../../contents/placeholders";
+import { CallApi } from "../../services/api/CallApi";
+import { Login as LoginPathApi } from "../../services/api/ApiRoutes";
+import { UserLoginResponse } from "../../viewModel/types/UserLoginTypes";
+import { GetTokenLocal, SaveTokenLocal } from "../../services/token/token";
 
 const Login = () => {
   //! From Redux => user
-  const dispatch = useDispatch<AppThunkDispatch>();
+  const dispatch = useDispatch();
   const userAdmin = useSelector((state: RootState) => state.user);
 
   const [loading, setloading] = useState(false);
@@ -26,10 +30,43 @@ const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setpassword] = useState<string>("");
   const navigate = useNavigate();
-  const CheckUserLogin = () => {
-    //* authorization user
-    dispatch(fetcherLoginUser({ username: username, password: password }));
+
+  //! login request to backend
+  const loginRequest: () => void = async () => {
+    const { data, status } = await CallApi<UserLoginResponse>(
+      LoginPathApi(username, password),
+      null,
+      false,
+      "GET",
+      false
+    );
+
+    if (status === 200) {
+      SaveTokenLocal(
+        data?.data?.token?.token ?? "",
+        data?.data?.token?.tokenExpire ?? ""
+      );
+      navigate("/");
+    } else {
+      alert(data.message);
+    }
   };
+
+  const CheckUserLogin = async () => {
+    //* authorization user
+    if (username === "" || password === "") {
+      console.log("error");
+      return;
+    }
+
+    loginRequest();
+  };
+
+  useEffect(() => {
+    if (GetTokenLocal() !== false) {
+      navigate("/");
+    };
+  }, []);
 
   return (
     <BeforeLoginContainer>
@@ -48,12 +85,12 @@ const Login = () => {
 
           <div className={Style.login_fileds}>
             <TextField
-              placeHolder="نام کاربری"
+              placeHolder={PlaceHolderContent.username}
               value={username}
               onChangeMethod={(e) => setUsername(e.target.value)}
             />
             <PasswordField
-              placeholder={"کلمه عبور"}
+              placeholder={PlaceHolderContent.password}
               onChangeMethod={(e) => setpassword(e.target.value)}
               value={password}
             />
