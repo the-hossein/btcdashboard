@@ -15,23 +15,6 @@ const initialState: InitialStateUser = {
     is_login: false,
 };
 
-
-// //! this is thunk for user login
-// export const fetcherLoginUser = createAsyncThunk(
-//     "users/login/",
-//     async (userData: UserDataLogin, thunkApi) => {
-//         const { username, password } = userData;
-//         try {
-//             const { data } = await callApi(Login(username, password), false, "{}", "get", false);
-//             console.log(data)
-//             return data;
-//         } catch (error) {
-//             return thunkApi.rejectWithValue(error)
-//         }
-
-//     }
-// )
-
 export const userSlice = createSlice({
     name: "user_controller",
     initialState,

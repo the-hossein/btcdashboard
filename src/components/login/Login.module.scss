@@ -43,8 +43,12 @@
   .login_fileds {
     width: 80%;
     margin: auto;
-    .login_btn{
+    .login_btn {
       margin-top: 3rem;
+      .circularProgress {
+        width: fit-content;
+        margin: 0 auto;
+      }
     }
   }
 }

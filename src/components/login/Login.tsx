@@ -18,6 +18,9 @@ import { CallApi } from "../../services/api/CallApi";
 import { Login as LoginPathApi } from "../../services/api/ApiRoutes";
 import { UserLoginResponse } from "../../viewModel/types/UserLoginTypes";
 import { GetTokenLocal, SaveTokenLocal } from "../../services/token/token";
+import { setLoader } from "../../redux/slices/userSlice";
+import { ShowToast } from "../../tools/toast/toastify";
+import { StatusEnumToast } from "../../viewModel/enums/StatusToastEnum";
 
 const Login = () => {
   //! From Redux => user
@@ -33,6 +36,7 @@ const Login = () => {
 
   //! login request to backend
   const loginRequest: () => void = async () => {
+    setloading(true);
     const { data, status } = await CallApi<UserLoginResponse>(
       LoginPathApi(username, password),
       null,
@@ -42,20 +46,23 @@ const Login = () => {
     );
 
     if (status === 200) {
+      ShowToast(StatusEnumToast.success, "با موفقیت وارد حساب کاربری خود شدید");
       SaveTokenLocal(
         data?.data?.token?.token ?? "",
         data?.data?.token?.tokenExpire ?? ""
       );
       navigate("/");
     } else {
-      alert(data.message);
+      ShowToast(StatusEnumToast.error, data.message);
     }
+
+    setloading(false);
   };
 
   const CheckUserLogin = async () => {
     //* authorization user
     if (username === "" || password === "") {
-      console.log("error");
+      ShowToast(StatusEnumToast.error, "باید تمام فیلد ها را پر کنید");
       return;
     }
 
@@ -65,7 +72,7 @@ const Login = () => {
   useEffect(() => {
     if (GetTokenLocal() !== false) {
       navigate("/");
-    };
+    }
   }, []);
 
   return (
@@ -95,12 +102,17 @@ const Login = () => {
               value={password}
             />
             <div className={`${Style.login_btn}`}>
-              <Button text={"ورود"} clickMethod={CheckUserLogin} />
+              {loading === true ? (
+                <div className={Style.circularProgress}>
+                  <CircularProgress />
+                </div>
+              ) : (
+                <Button text={"ورود"} clickMethod={CheckUserLogin} />
+              )}
             </div>
           </div>
         </div>
       </AlignCenterContainer>
-      {loading === true && <CircularProgress />}
     </BeforeLoginContainer>
   );
 };
