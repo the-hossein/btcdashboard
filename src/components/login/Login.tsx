@@ -21,15 +21,11 @@ import { GetTokenLocal, SaveTokenLocal } from "../../services/token/token";
 import { setLoader } from "../../redux/slices/userSlice";
 import { ShowToast } from "../../tools/toast/toastify";
 import { StatusEnumToast } from "../../viewModel/enums/StatusToastEnum";
+import { ResultModel } from "../../viewModel/types/IApi";
 
 const Login = () => {
   //! From Redux => user
-  const dispatch = useDispatch();
-  const userAdmin = useSelector((state: RootState) => state.user);
-
   const [loading, setloading] = useState(false);
-  const [messageType, setmessageType] = useState<MessageType | null>(null);
-  const [messageContent, setmessageContent] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [password, setpassword] = useState<string>("");
   const navigate = useNavigate();
@@ -37,23 +33,24 @@ const Login = () => {
   //! login request to backend
   const loginRequest: () => void = async () => {
     setloading(true);
-    const { data, status } = await CallApi<UserLoginResponse>(
-      LoginPathApi(username, password),
-      null,
-      false,
-      "GET",
-      false
-    );
+    const userLoginResult: ResultModel<UserLoginResponse> =
+      await CallApi<UserLoginResponse>(
+        LoginPathApi(username, password),
+        null,
+        false,
+        "GET",
+        false
+      );
 
-    if (status === 200) {
+    if (userLoginResult.statusCode === 200) {
       ShowToast(StatusEnumToast.success, "با موفقیت وارد حساب کاربری خود شدید");
       SaveTokenLocal(
-        data?.data?.token?.token ?? "",
-        data?.data?.token?.tokenExpire ?? ""
+        userLoginResult.data?.data?.token.token ?? "",
+        userLoginResult.data?.data?.token.tokenExpire ?? ""
       );
       navigate("/");
     } else {
-      ShowToast(StatusEnumToast.error, data.message);
+      ShowToast(StatusEnumToast.error, userLoginResult.data?.message ?? "");
     }
 
     setloading(false);
@@ -87,8 +84,6 @@ const Login = () => {
           <div className={Style.logo}>
             <img src={Logo} />
           </div>
-
-          <MessageHandler type={messageType} message={messageContent} />
 
           <div className={Style.login_fileds}>
             <TextField
