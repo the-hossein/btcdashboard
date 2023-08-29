@@ -20,6 +20,9 @@
     @include Mix.filed-height;
     text-align: left;
     color: var(--main-pen);
+    &::placeholder {
+      text-align: right;
+    }
 
     &:focus-visible {
       outline: 0px solid white;

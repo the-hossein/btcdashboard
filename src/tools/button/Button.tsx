@@ -8,13 +8,15 @@ interface Props {
 }
 const Button: React.FC<Props> = ({ text, link, clickMethod }) => {
   return (
-    <div className={Style.button}>
-      {link != null ? (
-        <Link to={link}>{text}</Link>
-      ) : (
-        <a onClick={clickMethod}>{text}</a>
-      )}
-    </div>
+    <>
+      <div className={Style.button}>
+        {link != null ? (
+          <Link to={link}>{text}</Link>
+        ) : (
+          <a onClick={clickMethod}>{text}</a>
+        )}
+      </div>
+    </>
   );
 };
 

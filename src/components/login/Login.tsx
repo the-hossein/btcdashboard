@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { BeforeLoginContainer } from "../../tools/container/beforeLoginContainer.tsx/Container";
 import { AlignCenterContainer } from "../../tools/container/customeContainer/AlignCenterContainer";
 import { CircularProgress } from "@mui/material";
@@ -11,13 +11,70 @@ import { useNavigate } from "react-router-dom";
 import TextField from "../../tools/fields/textField/TextField";
 import PasswordField from "../../tools/fields/passwordField/PasswordField";
 import Button from "../../tools/button/Button";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/store";
+import { PlaceHolderContent } from "../../contents/placeholders";
+import { CallApi } from "../../services/api/CallApi";
+import { Login as LoginPathApi } from "../../services/api/ApiRoutes";
+import { UserLoginResponse } from "../../viewModel/types/UserLoginTypes";
+import { GetTokenLocal, SaveTokenLocal } from "../../services/token/token";
+import { setLoader } from "../../redux/slices/userSlice";
+import { ShowToast } from "../../tools/toast/toastify";
+import { StatusEnumToast } from "../../viewModel/enums/StatusToastEnum";
+
 const Login = () => {
+  //! From Redux => user
+  const dispatch = useDispatch();
+  const userAdmin = useSelector((state: RootState) => state.user);
+
   const [loading, setloading] = useState(false);
   const [messageType, setmessageType] = useState<MessageType | null>(null);
   const [messageContent, setmessageContent] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [password, setpassword] = useState<string>("");
   const navigate = useNavigate();
-  const CheckUserLogin = () => {};
+
+  //! login request to backend
+  const loginRequest: () => void = async () => {
+    setloading(true);
+    const { data, status } = await CallApi<UserLoginResponse>(
+      LoginPathApi(username, password),
+      null,
+      false,
+      "GET",
+      false
+    );
+
+    if (status === 200) {
+      ShowToast(StatusEnumToast.success, "با موفقیت وارد حساب کاربری خود شدید");
+      SaveTokenLocal(
+        data?.data?.token?.token ?? "",
+        data?.data?.token?.tokenExpire ?? ""
+      );
+      navigate("/");
+    } else {
+      ShowToast(StatusEnumToast.error, data.message);
+    }
+
+    setloading(false);
+  };
+
+  const CheckUserLogin = async () => {
+    //* authorization user
+    if (username === "" || password === "") {
+      ShowToast(StatusEnumToast.error, "باید تمام فیلد ها را پر کنید");
+      return;
+    }
+
+    loginRequest();
+  };
+
+  useEffect(() => {
+    if (GetTokenLocal() !== false) {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <BeforeLoginContainer>
       <AlignCenterContainer>
@@ -34,17 +91,28 @@ const Login = () => {
           <MessageHandler type={messageType} message={messageContent} />
 
           <div className={Style.login_fileds}>
-            <TextField placeHolder="UserName" />
+            <TextField
+              placeHolder={PlaceHolderContent.username}
+              value={username}
+              onChangeMethod={(e) => setUsername(e.target.value)}
+            />
             <PasswordField
+              placeholder={PlaceHolderContent.password}
               onChangeMethod={(e) => setpassword(e.target.value)}
+              value={password}
             />
             <div className={`${Style.login_btn}`}>
-              <Button text={"Next"} clickMethod={CheckUserLogin} />
+              {loading === true ? (
+                <div className={Style.circularProgress}>
+                  <CircularProgress />
+                </div>
+              ) : (
+                <Button text={"ورود"} clickMethod={CheckUserLogin} />
+              )}
             </div>
           </div>
         </div>
       </AlignCenterContainer>
-      {loading === true && <CircularProgress />}
     </BeforeLoginContainer>
   );
 };
