@@ -1,28 +1,29 @@
 @font-face {
-  font-family: "Poppins-Light";
-  src: url("./assets/fonts/Poppins-Light.ttf");
-  src: url("./assets/fonts//Poppins-Light.ttf") format("truetype");
+  font-family: "IranSans-Light";
+  src: url("./assets/fonts/IRANSansWeb_Light.ttf");
+  src: url("./assets/fonts/IRANSansWeb_Light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "Poppins-Medium";
-  src: url("./assets/fonts/Poppins-Medium.ttf");
-  src: url("./assets/fonts//Poppins-Medium.ttf") format("truetype");
+  font-family: "IranSans";
+  src: url("./assets/fonts/IRANSansWeb.ttf");
+  src: url("./assets/fonts/IRANSansWeb.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
 }
 @font-face {
-  font-family: "Poppins-Regular";
-  src: url("./assets/fonts/Poppins-Regular.ttf");
-  src: url("./assets/fonts//Poppins-Regular.ttf") format("truetype");
-  font-weight: normal;
+  font-family: "IranSans-Medium";
+  src: url("./assets/fonts/IRANSansWeb_Medium.ttf");
+  src: url("./assets/fonts/IRANSansWeb_Medium.ttf") format("truetype");
+  font-weight: 100;
   font-style: normal;
 }
+
 @font-face {
-  font-family: "Poppins-SemiBold";
-  src: url("./assets/fonts/Poppins-SemiBold.ttf");
-  src: url("./assets/fonts//Poppins-SemiBold.ttf") format("truetype");
+  font-family: "IranSans-SemiBold";
+  src: url("./assets/fonts/IRANSansWeb_Bold.ttf");
+  src: url("./assets/fonts/IRANSansWeb_Bold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -38,19 +39,20 @@
   --light-gray: #cecece77;
   --light-pen: #eee;
   /* fonts */
-  --semibold: "Poppins-SemiBold";
-  --medium: "Poppins-Medium";
-  --regular: "Poppins-Regular";
-  --light-weight: "Poppins-Light";
+  --semibold: "IranSans-SemiBold";
+  --medium: "IranSans-Medium";
+  --regular: "IranSans";
+  --light-weight: "IranSans-Light";
   /* general */
   --box-shadow: 0px 4px 8px rgba(169, 169, 169, 0.11);
   --fast-transition: all 0.5s ease-out;
   --carve: 6px;
   --box-carve: 12px;
+  --site-side: right;
 }
 body {
   margin: 0;
-
+  direction: rtl;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-color);

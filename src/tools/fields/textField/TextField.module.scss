@@ -14,11 +14,12 @@
     }
   }
   input {
+    @include Font.Text300;
     @include Mix.border;
     width: 100%;
     display: block;
     @include Mix.filed-height;
-    text-align: left;
+    text-align: var(--site-side);
     color: var(--main-pen);
     &::placeholder {
       text-align: right;
