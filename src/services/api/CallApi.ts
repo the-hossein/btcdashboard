@@ -1,5 +1,5 @@
 import { BaseUrl } from "./ApiRoutes";
-import { GetTokenLocal } from "../token/Token";
+import { GetTokenLocal } from "../token/token";
 import { IResponseDataModel, ResultModel } from "../../viewModel/types/IApi";
 
 export const CallApi = async <T>(
