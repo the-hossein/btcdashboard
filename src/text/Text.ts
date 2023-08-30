@@ -1,0 +1,1 @@
+export const EmptyFieldsMessage = "لطفا فیلد های خالی را پر کنید";
