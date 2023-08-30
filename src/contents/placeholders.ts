@@ -1,7 +1,4 @@
-interface IPlaceHolder {
-    username: string;
-    password: string;
-}
+import { IPlaceHolder } from "../viewModel/types/IPlaceHolder";
 
 export const PlaceHolderContent: IPlaceHolder = {
     username: "نام کاربری",

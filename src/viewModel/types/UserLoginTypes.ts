@@ -1,9 +1,9 @@
-export interface UserLoginInterface {
+export interface IUserLoginRequest {
   username: string;
   password: string;
 }
 
-export interface UserLoginResponse {
+export interface IUserLoginResponse {
   userName: string;
   token: {
     token: string;

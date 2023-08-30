@@ -12,8 +12,6 @@ const options: ToastOptions = {
     theme: "light",
 }
 
-
-
 export const ShowToast = (status: StatusEnumToast, message: string): void => {
     toast[status](message, options)
 }

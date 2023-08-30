@@ -1,11 +1,7 @@
-interface TokenObject {
-    token: string;
-    expire: string;
-}
-
+import { ITokenObject } from "../../viewModel/types/IToken";
 
 export const SaveTokenLocal: (token: string, expire: string) => void = (token, expire) => {
-    let obj: TokenObject = {
+    let obj: ITokenObject = {
         token,
         expire,
     };
