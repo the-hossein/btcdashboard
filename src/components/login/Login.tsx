@@ -13,15 +13,15 @@ import PasswordField from "../../tools/fields/passwordField/PasswordField";
 import Button from "../../tools/button/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux/store";
-import { PlaceHolderContent } from "../../contents/placeholders";
+import { PlaceHolderContent } from "../../contents/PlaceHolders";
 import { CallApi } from "../../services/api/CallApi";
 import { Login as LoginPathApi } from "../../services/api/ApiRoutes";
-import { UserLoginResponse } from "../../viewModel/types/UserLoginTypes";
-import { GetTokenLocal, SaveTokenLocal } from "../../services/token/token";
-import { setLoader } from "../../redux/slices/userSlice";
-import { ShowToast } from "../../tools/toast/toastify";
+import { IUserLoginResponse } from "../../viewModel/types/UserLoginTypes";
+import { GetTokenLocal, SaveTokenLocal } from "../../services/token/Token";
+import { ShowToast } from "../../tools/toast/Toastify";
 import { StatusEnumToast } from "../../viewModel/enums/StatusToastEnum";
 import { ResultModel } from "../../viewModel/types/IApi";
+import { MessageToastLogin } from "../../viewModel/enums/MessageToastLoginEnum";
 
 const Login = () => {
   //! From Redux => user
@@ -33,8 +33,8 @@ const Login = () => {
   //! login request to backend
   const loginRequest: () => void = async () => {
     setloading(true);
-    const userLoginResult: ResultModel<UserLoginResponse> =
-      await CallApi<UserLoginResponse>(
+    const userLoginResult: ResultModel<IUserLoginResponse> =
+      await CallApi<IUserLoginResponse>(
         LoginPathApi(username, password),
         null,
         false,
@@ -43,7 +43,7 @@ const Login = () => {
       );
 
     if (userLoginResult.statusCode === 200) {
-      ShowToast(StatusEnumToast.success, "با موفقیت وارد حساب کاربری خود شدید");
+      ShowToast(StatusEnumToast.success, MessageToastLogin.successResponse);
       SaveTokenLocal(
         userLoginResult.data?.data?.token.token ?? "",
         userLoginResult.data?.data?.token.tokenExpire ?? ""
@@ -58,9 +58,8 @@ const Login = () => {
 
   const CheckUserLogin = async () => {
     //* authorization user
-    alert("moz")
     if (username === "" || password === "") {
-      ShowToast(StatusEnumToast.error, "باید تمام فیلد ها را پر کنید");
+      ShowToast(StatusEnumToast.error, MessageToastLogin.emptyField);
       return;
     }
 

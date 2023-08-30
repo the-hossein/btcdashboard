@@ -1,17 +1,17 @@
 import { BaseUrl } from "./ApiRoutes";
-import { GetTokenLocal } from "../token/token";
+import { GetTokenLocal } from "../token/Token";
 import { IResponseDataModel, ResultModel } from "../../viewModel/types/IApi";
 
 export const CallApi = async <T>(
   Url: string,
   Body: RequestInit["body"],
-  Header: boolean,
+  Auth: boolean,
   Method: string,
   File: boolean
 ): Promise<ResultModel<T>> => {
   let headerApi: RequestInit["headers"];
   let contentType: string = File ? "multipart/form-data" : "application/json";
-  if (Header === false) {
+  if (Auth === false) {
     // headerApi = { "Content-Type": contentType };
   } else {
     const userToken = GetTokenLocal();
@@ -27,12 +27,14 @@ export const CallApi = async <T>(
       method: Method,
       headers: headerApi,
       redirect: "follow",
+      credentials: "same-origin",
     };
   } else {
     requestOptions = {
       method: Method,
       headers: headerApi,
       redirect: "follow",
+      credentials: "same-origin",
       body: Body,
     };
   }
