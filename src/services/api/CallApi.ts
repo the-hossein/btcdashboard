@@ -10,38 +10,39 @@ export const CallApi = async <T>(
   Method: string,
   File: boolean
 ): Promise<ResultModel<T>> => {
-  let headerApi: RequestInit["headers"];
+  let headers: RequestInit["headers"];
   let contentType: string = File ? "multipart/form-data" : "application/json";
   if (Auth === false) {
-    // headerApi = { "Content-Type": contentType };
+    headers = { "Content-Type": contentType };
   } else {
     const userToken: ITokenObject | false = GetTokenLocal();
-
-    headerApi = {
-      Authorization: `Bearer ${userToken !== false && userToken?.userName}`,
-      // "Content-Type": contentType,
+    headers = {
+      "Content-Type": contentType,
+      "Authorization": `Bearer ${userToken !== false && userToken?.userName}`,
     };
   }
 
-  let requestOptions: RequestInit;
+  let options: RequestInit;
   if (Body === null) {
-    requestOptions = {
+    options = {
       method: Method,
-      headers: headerApi,
+      headers: headers,
       redirect: "follow",
       credentials: "same-origin",
     };
   } else {
-    requestOptions = {
+    options = {
       method: Method,
-      headers: headerApi,
+      headers: headers,
       redirect: "follow",
       credentials: "same-origin",
       body: Body,
     };
   }
 
-  const response = await fetch(BaseUrl + Url, requestOptions);
+  const urlReq: string = BaseUrl + Url;
+
+  const response = await fetch(urlReq, options);
   const _data: IResponseDataModel<T> = await response.json();
   const status = await response.status;
 

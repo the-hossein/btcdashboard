@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ITokenObject } from "../viewModel/types/IToken";
 import { GetTokenLocal } from "../services/token/Token";
-import { useDispatch } from "react-redux";
 import { ResultModel } from "../viewModel/types/IApi";
 import { CallApi } from "../services/api/CallApi";
 import { GetProfile } from "../services/api/ApiRoutes";
@@ -9,6 +8,7 @@ import { GetProfile } from "../services/api/ApiRoutes";
 const useAuth = () => {
   const [auth, setAuth] = useState<null>(null);
   const tokenLocal: false | ITokenObject = GetTokenLocal();
+
   const authorization = async () => {
     if (tokenLocal === false) {
       setAuth(null);
@@ -27,10 +27,6 @@ const useAuth = () => {
   };
 
   useEffect(() => {
-    // if (tokenLocal === false) {
-    //   setAuth(null);
-    // } else {
-    // }
     authorization();
   }, []);
 

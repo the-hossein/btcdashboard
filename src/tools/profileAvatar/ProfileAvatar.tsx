@@ -6,6 +6,7 @@ import useAuth from "../../Hooks/useAuth";
 interface IProps {}
 
 const ProfileAvatar: FC<IProps> = () => {
+  //! For getProfile and authenticate
   const [profileInfo] = useAuth();
 
   return (

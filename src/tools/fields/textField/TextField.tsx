@@ -20,10 +20,7 @@ const TextField: React.FC<Props> = ({
         {icon}
         <span>{lable}</span>
       </div>
-      <input
-        onChange={onChangeMethod}
-        placeholder={placeHolder}
-      />
+      <input onChange={onChangeMethod} placeholder={placeHolder} />
     </div>
   );
 };

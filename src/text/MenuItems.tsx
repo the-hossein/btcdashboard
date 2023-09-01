@@ -22,31 +22,31 @@ export const MenuItems: Array<IMenuText> = [
       </>
     ),
     children: [
-        {
-            id: 10,
-            name: "بلاگ ها",
-            path: "/blog",
-            icon: <Book size={22} />
-        },
-        {
-            id: 11,
-            name: "پست ها",
-            path: "/blog",
-            icon: <Book size={22} />
-        },
-        {
-            id: 12,
-            name: "پست ها",
-            path: "/blog",
-            icon: <Book size={22} />
-        },
-        {
-            id: 13,
-            name: "پست ها",
-            path: "/blog",
-            icon: <Book size={22} />
-        },
-    ]
+      {
+        id: 10,
+        name: "بلاگ ها",
+        path: "/blog",
+        icon: <Book size={22} />,
+      },
+      {
+        id: 11,
+        name: "پست ها",
+        path: "/blog",
+        icon: <Book size={22} />,
+      },
+      {
+        id: 12,
+        name: "پست ها",
+        path: "/blog",
+        icon: <Book size={22} />,
+      },
+      {
+        id: 13,
+        name: "پست ها",
+        path: "/blog",
+        icon: <Book size={22} />,
+      },
+    ],
   },
   {
     id: 3,
