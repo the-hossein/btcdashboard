@@ -1,6 +1,7 @@
 import { BaseUrl } from "./ApiRoutes";
 import { GetTokenLocal } from "../token/Token";
 import { IResponseDataModel, ResultModel } from "../../viewModel/types/IApi";
+import { ITokenObject } from "../../viewModel/types/IToken";
 
 export const CallApi = async <T>(
   Url: string,
@@ -14,10 +15,11 @@ export const CallApi = async <T>(
   if (Auth === false) {
     // headerApi = { "Content-Type": contentType };
   } else {
-    const userToken = GetTokenLocal();
+    const userToken: ITokenObject | false = GetTokenLocal();
+
     headerApi = {
-      Authorization: `Bearer ${userToken}`,
-      "Content-Type": contentType,
+      Authorization: `Bearer ${userToken !== false && userToken?.userName}`,
+      // "Content-Type": contentType,
     };
   }
 

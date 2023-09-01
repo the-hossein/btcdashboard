@@ -1,0 +1,10 @@
+@use "../../assets/Mix.scss";
+
+.dashboard_body {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  position: relative;
+  padding-left: 5px;
+  @include Mix.style-scrollbar;
+}

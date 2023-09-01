@@ -1,9 +1,10 @@
 import { ITokenObject } from "../../viewModel/types/IToken";
 
-export const SaveTokenLocal: (token: string, expire: string) => void = (token, expire) => {
+export const SaveTokenLocal: (token: string, expire: string, userName: string) => void = (token, expire, userName) => {
     let obj: ITokenObject = {
         token,
         expire,
+        userName
     };
     localStorage.setItem("UserToken", JSON.stringify(obj));
 };
@@ -13,12 +14,12 @@ export const DeleteTokenLocal: () => void = () => {
 };
 
 
-export const GetTokenLocal: () => false | string = () => {
+export const GetTokenLocal: () => false | ITokenObject = () => {
     if (localStorage.getItem("UserToken") == null) {
         return false;
     } else {
         const localValue: string | null = localStorage.getItem("UserToken");
-        let obj;
+        let obj ;
 
         if (localValue !== null) {
             obj = JSON.parse(localValue);
@@ -28,7 +29,7 @@ export const GetTokenLocal: () => false | string = () => {
         const nowDate = new Date().getTime();
 
         if (expireDate > nowDate) {
-            return obj.token;
+            return obj;
         } else {
             DeleteTokenLocal();
             return false;
