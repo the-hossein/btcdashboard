@@ -1,0 +1,20 @@
+@use "../../assets/Mix.scss";
+
+.navigation_header {
+  width: 100%;
+  @include Mix.white_box;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.container_nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search_container{
+    width: 310px;
+}

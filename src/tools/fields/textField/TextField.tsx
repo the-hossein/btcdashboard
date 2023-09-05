@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 import Style from "./TextField.module.scss";
 
 interface Props {
@@ -20,10 +20,7 @@ const TextField: React.FC<Props> = ({
         {icon}
         <span>{lable}</span>
       </div>
-      <input
-        onChange={onChangeMethod}
-        placeholder={placeHolder}
-      />
+      <input onChange={onChangeMethod} placeholder={placeHolder} />
     </div>
   );
 };

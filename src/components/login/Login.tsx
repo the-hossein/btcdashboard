@@ -19,7 +19,7 @@ import { ShowToast } from "../../tools/toast/Toastify";
 import { StatusEnumToast } from "../../viewModel/enums/StatusToastEnum";
 import { ResultModel } from "../../viewModel/types/IApi";
 import { EmptyFieldsMessage } from "../../text/Text";
-
+import { ITokenObject } from "../../viewModel/types/IToken";
 
 const Login = () => {
   //! From Redux => user
@@ -44,7 +44,8 @@ const Login = () => {
       //ShowToast(StatusEnumToast.success, MessageToastLogin.successResponse);
       SaveTokenLocal(
         userLoginResult.data?.data?.token.token ?? "",
-        userLoginResult.data?.data?.token.tokenExpire ?? ""
+        userLoginResult.data?.data?.token.tokenExpire ?? "",
+        userLoginResult.data?.data?.userName ?? ""
       );
       navigate("/");
     } else {

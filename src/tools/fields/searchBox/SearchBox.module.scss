@@ -1,0 +1,38 @@
+@use "../../../assets/Mix.scss";
+@use "../../../assets/Font.scss";
+
+.container_box {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  div {
+    position: absolute;
+    top: 50%;
+    translate: 0% -50%;
+    right: .5rem;
+  }
+  input {
+    @include Font.Text300;
+    @include Mix.border;
+    width: 100%;
+    display: block;
+    @include Mix.filed-height;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: var(--site-side);
+    color: var(--main-pen);
+    padding-right: 2.5rem;
+    background-color: var(--bg-color);
+    direction: rtl;
+    &::placeholder {
+      text-align: right;
+    }
+
+    &:focus-visible {
+      outline: 0px solid white;
+    }
+    &::placeholder {
+      @include Font.Text300;
+    }
+  }
+}
