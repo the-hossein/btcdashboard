@@ -1,0 +1,33 @@
+@use "../../assets/Font.scss";
+
+.profile_container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 8px;
+  height: auto;
+  width: fit-content;
+  border-right: 1px solid var(--border-color);
+  padding-right: 8px;
+  padding-left: 1rem;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .user_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    span:nth-child(1) {
+      @include Font.Text300;
+    }
+    span:nth-child(2) {
+      @include Font.Text200;
+    }
+  }
+}
