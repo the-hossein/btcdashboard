@@ -1,7 +1,7 @@
 import { Book, Category, InfoCircle } from "iconsax-react";
 import { IMenuText } from "../viewModel/types/IMenuText";
 
-export const MenuItems: Array<IMenuText> = [
+export const MenuItems: IMenuText[] = [
   {
     id: 1,
     name: "داشبورد",

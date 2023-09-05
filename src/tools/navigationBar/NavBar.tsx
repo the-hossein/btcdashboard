@@ -2,7 +2,7 @@ import React from "react";
 import Style from "./NavBar.module.scss";
 import TextField from "../fields/textField/TextField";
 import { SearchNormal, SearchNormal1 } from "iconsax-react";
-import { PlaceHolderContent } from "../../contents/PlaceHolders";
+import { PlaceHolderContent } from "../../contents/placeHolders";
 import SearchBox from "../fields/searchBox/SearchBox";
 import ProfileAvatar from "../profileAvatar/ProfileAvatar";
 
