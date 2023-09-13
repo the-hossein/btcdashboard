@@ -13,13 +13,12 @@ export const CallApi = async <T>(
   let headers: RequestInit["headers"];
   let contentType: string = File ? "multipart/form-data" : "application/json";
   if (Auth === false) {
-    headers = { "Content-Type": contentType };
+    // headers = { "Content-Type": contentType };
   } else {
     const userToken: ITokenObject | false = GetTokenLocal();
-    headers = {
-      "Content-Type": contentType,
-      Authorization: `Bearer ${userToken !== false && userToken?.userName}`,
-    };
+    // headers = {
+    //   "Authorization": `Bearer ${userToken !== false && userToken?.userName}`,
+    // };
   }
 
   let options: RequestInit;

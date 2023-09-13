@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 
 interface IProps {
     gap?: string;
-
 }
 
 export const DashboardContainer = styled.div<IProps>`

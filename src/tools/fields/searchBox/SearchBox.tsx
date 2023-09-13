@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from "react";
+import React, { FC, ReactElement, CSSProperties } from "react";
 import Style from "./SearchBox.module.scss";
 
 interface IProps {
@@ -6,6 +6,7 @@ interface IProps {
   placeHolder?: string;
   value?: string;
   onChangeMethod?: (param?: any) => void;
+  style?: CSSProperties;
 }
 
 const SearchBox: FC<IProps> = ({
@@ -13,10 +14,11 @@ const SearchBox: FC<IProps> = ({
   placeHolder,
   value,
   onChangeMethod,
+  style,
 }) => {
   return (
     <>
-      <div className={Style.container_box}>
+      <div className={Style.container_box} style={style}>
         <div>{icon}</div>
         <input
           type="text"
