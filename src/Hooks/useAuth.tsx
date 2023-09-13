@@ -4,14 +4,16 @@ import { GetTokenLocal } from "../services/token/Token";
 import { ResultModel } from "../viewModel/types/IApi";
 import { CallApi } from "../services/api/CallApi";
 import { GetProfile } from "../services/api/ApiRoutes";
+import { useNavigate } from "react-router-dom";
 
 const useAuth = () => {
   const [auth, setAuth] = useState<null>(null);
-  const tokenLocal: false | ITokenObject = GetTokenLocal();
-
+  const navigate = useNavigate();
   const authorization = async () => {
-    if (tokenLocal === false) {
+    const tokenLocal: ITokenObject = GetTokenLocal();
+    if (tokenLocal.isValid == false) {
       setAuth(null);
+      navigate("/log-in");
     } else {
       const userProfileResult: ResultModel<any> = await CallApi(
         GetProfile(tokenLocal?.userName),

@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import TextField from "../../tools/fields/textField/TextField";
 import PasswordField from "../../tools/fields/passwordField/PasswordField";
 import Button from "../../tools/button/Button";
-import { PlaceHolderContent } from "../../contents/PlaceHolders";
+import { PlaceHolderContent } from "../../contents/placeHolders";
 import { CallApi } from "../../services/api/CallApi";
 import { Login as LoginPathApi } from "../../services/api/ApiRoutes";
 import { IUserLoginResponse } from "../../viewModel/types/UserLoginTypes";
@@ -19,7 +19,7 @@ import { ShowToast } from "../../tools/toast/Toastify";
 import { StatusEnumToast } from "../../viewModel/enums/StatusToastEnum";
 import { ResultModel } from "../../viewModel/types/IApi";
 import { EmptyFieldsMessage } from "../../text/Text";
-import { ITokenObject } from "../../viewModel/types/IToken";
+import { StatusCode } from "../../viewModel/enums/StatusCode";
 
 const Login = () => {
   //! From Redux => user
@@ -36,11 +36,11 @@ const Login = () => {
         LoginPathApi(username, password),
         null,
         false,
-        "GET",
+        "POST",
         false
       );
 
-    if (userLoginResult.statusCode === 200) {
+    if (userLoginResult.statusCode === StatusCode.Success) {
       //ShowToast(StatusEnumToast.success, MessageToastLogin.successResponse);
       SaveTokenLocal(
         userLoginResult.data?.data?.token.token ?? "",
@@ -66,7 +66,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (GetTokenLocal() !== false) {
+    if (GetTokenLocal().isValid !== false) {
       navigate("/");
     }
   }, []);
