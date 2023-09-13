@@ -1,13 +1,13 @@
 import { FC } from "react";
-import { Container } from "../../tools/container/customeContainer/Container";
 import { MainLayoutDashboard } from "../../tools/dashboardLayout/DashboardLayout";
 import { DashboardContainer } from "../../tools/dashboardLayout/DashboardContainer";
 import { Item } from "../../tools/dashboardLayout/ItemDashboard";
 import Menu from "../../tools/menu/Menu";
 import DashboardBody from "../../tools/dashboardBody/DashboardBody";
 import NavBar from "../../tools/navigationBar/NavBar";
-import DashboardSection from "../../tools/dashboardSection/DashboardSection";
-import { MenuItems } from "../../text/MenuItems";
+import { Outlet } from "react-router-dom";
+import { DashboardScroll } from "../../tools/dashboardLayout/DashboardScrollBody";
+import Style from "../../tools/dashboardBody/DashboardBody.module.scss";
 
 interface IProps {}
 
@@ -21,7 +21,9 @@ const Dashboard: FC<IProps> = () => {
         <Item width="100%">
           <DashboardBody>
             <NavBar />
-            <DashboardSection title={MenuItems[0].name} />
+            <DashboardScroll mt="2rem" className={Style.scrollbar_theme}>
+              <Outlet />
+            </DashboardScroll>
           </DashboardBody>
         </Item>
       </DashboardContainer>

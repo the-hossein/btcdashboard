@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import TextField from "../../tools/fields/textField/TextField";
 import PasswordField from "../../tools/fields/passwordField/PasswordField";
 import Button from "../../tools/button/Button";
-import { PlaceHolderContent } from "../../contents/placeHolders";
+import { PlaceHolderContent } from "../../contents/PlaceHolders";
 import { CallApi } from "../../services/api/CallApi";
 import { Login as LoginPathApi } from "../../services/api/ApiRoutes";
 import { IUserLoginResponse } from "../../viewModel/types/UserLoginTypes";

@@ -5,5 +5,5 @@ export interface IMenuText {
     name: string;
     path: string;
     icon: React.ReactNode;
-    children?: Array<IMenuText>;
+    children?: IMenuText[];
 }

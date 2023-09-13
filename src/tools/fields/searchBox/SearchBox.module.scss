@@ -5,11 +5,12 @@
   position: relative;
   width: 100%;
   height: fit-content;
+  background-color: var(--bg-color);
   div {
     position: absolute;
     top: 50%;
     translate: 0% -50%;
-    right: .5rem;
+    right: 0.5rem;
   }
   input {
     @include Font.Text300;
@@ -22,7 +23,7 @@
     text-align: var(--site-side);
     color: var(--main-pen);
     padding-right: 2.5rem;
-    background-color: var(--bg-color);
+    background-color: transparent;
     direction: rtl;
     &::placeholder {
       text-align: right;

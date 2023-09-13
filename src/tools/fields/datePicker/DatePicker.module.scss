@@ -1,0 +1,34 @@
+@use "../../../assets/Font.scss";
+@use "../../../assets/Mix.scss";
+
+.main_container {
+  width: fit-content;
+  @include Font.Text300;
+  @include Mix.border;
+  @include Mix.filed-height;
+  padding: 6px 12px !important;
+  text-align: var(--site-side);
+  color: var(--main-pen);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.date_picker {
+  border: none;
+  @include Font.Text300;
+  input {
+    border: none;
+    outline: none;
+    @include Font.Text300;
+    appearance: none;
+    width: 70px !important;
+    min-width: 65px !important;
+    max-width: none !important;
+    &:focus {
+      border: none !important;
+      outline: none !important;
+    }
+  }
+}
