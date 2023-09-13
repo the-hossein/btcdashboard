@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Style from "./ProfileAvatar.module.scss";
 import Profile from "../../assets/images/user.png";
-import useAuth from "../../Hooks/UseAuth";
+import useAuth from "../../hooks/UseAuth";
 
 interface IProps {}
 
