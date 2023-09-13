@@ -18,7 +18,7 @@ export const CallApi = async <T>(
     const userToken: ITokenObject | false = GetTokenLocal();
     headers = {
       "Content-Type": contentType,
-      "Authorization": `Bearer ${userToken !== false && userToken?.userName}`,
+      Authorization: `Bearer ${userToken !== false && userToken?.userName}`,
     };
   }
 
