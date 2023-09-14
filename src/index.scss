@@ -28,9 +28,9 @@
   font-style: normal;
 }
 :root {
-  --primary: #00a9ac;
-  --primary-light: #00a9ac28;
-  --bg-color: #fafafa;
+  --primary: #00A9AC;
+  --primary-light: #EFFEFF;
+  --bg-color: #F7F8F9;
   --main-pen: #757575;
   --dark-gray: #585858;
   --border-color: #e2e2e2;
@@ -60,4 +60,8 @@ body {
 }
 * {
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
 }

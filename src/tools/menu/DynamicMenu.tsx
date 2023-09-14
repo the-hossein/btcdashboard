@@ -20,4 +20,7 @@ export const DynamicMenuItems = styled.ul<IProps>`
   padding-right: 1rem;
   list-style: none;
   overflow: hidden;
+  a{
+    width: 100%;
+  }
 `;

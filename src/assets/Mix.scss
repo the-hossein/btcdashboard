@@ -88,9 +88,10 @@
 
 @mixin white_box {
   background-color: white;
-  box-shadow: var(--box-shadow);
+  // box-shadow: var(--box-shadow);
   padding: 16px;
   border-radius: var(--box-carve);
+  border: 1px solid var(--border-color);
 }
 
 @mixin filed-height {
