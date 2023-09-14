@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from "react";
 import Style from "./MainLayout.module.scss";
 import SearchBox from "../fields/searchBox/SearchBox";
-import { PlaceHolderContent } from "../../contents/PlaceHolders";
+import { PlaceHolderContent } from "../../contents/placeHolders";
 import { SearchNormal1 } from "iconsax-react";
 import DatePicker from "../fields/datePicker/DatePicker";
 import { Item } from "../dashboardLayout/ItemDashboard";
