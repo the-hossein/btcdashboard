@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ITokenObject } from "../viewModel/types/IToken";
 import { GetTokenLocal } from "../services/token/Token";
 import { ResultModel } from "../viewModel/types/IApi";
@@ -6,17 +6,15 @@ import { CallApi } from "../services/api/CallApi";
 import { GetProfile } from "../services/api/ApiRoutes";
 import { useNavigate } from "react-router-dom";
 import { IProfileUser } from "../viewModel/types/IProfile";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { StatusCode } from "../viewModel/enums/StatusCode";
 import {
-  InitialStateUser,
   setLoader,
   setUserProfile,
 } from "../redux/slices/UserSlice";
 import { ShowToast } from "../tools/toast/Toastify";
 import { StatusEnumToast } from "../viewModel/enums/StatusToastEnum";
 import { GetProfileMessages } from "../contents/BackendMessages";
-import { RootState, useTypedSelector } from "../redux/store";
 
 const useAuth = () => {
   const dispatch = useDispatch();
