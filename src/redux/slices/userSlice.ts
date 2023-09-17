@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit"
+import { IProfileUser } from "../../viewModel/types/IProfile";
 
-interface InitialStateUser {
+export interface InitialStateUser {
     loader: boolean;
     info: null | {};
     userId: null | number;
     is_login: boolean;
+    userProfile: null | IProfileUser;
 }
 
 const initialState: InitialStateUser = {
@@ -13,6 +15,7 @@ const initialState: InitialStateUser = {
     info: null,
     userId: null,
     is_login: false,
+    userProfile: null,
 };
 
 export const userSlice = createSlice({
@@ -21,11 +24,14 @@ export const userSlice = createSlice({
     reducers: {
         setLoader: (state, action: PayloadAction<boolean>) => {
             state.loader = action.payload;
+        },
+        setUserProfile: (state, action) => {
+            state.userProfile = action.payload;
         }
     },
 });
 
 
-export const { setLoader } = userSlice.actions;
+export const { setLoader, setUserProfile } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -32,7 +32,6 @@ export const GetTokenLocal: () => ITokenObject = () => {
     tokenState.isValid = false;
   } else {
     const tokenInfo: ITokenObject = JSON.parse(userToken);
-    console.log(tokenInfo);
     const expireDate = new Date(tokenInfo.expire).getTime();
     const nowDate = new Date().getTime();
 
