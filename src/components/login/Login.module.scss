@@ -9,7 +9,9 @@
   border-radius: 8px;
   padding: 1rem 2.5rem 3rem;
   .header {
+    width: 100%;
     display: flex;
+    flex-direction: row-reverse;
     justify-content: space-between;
 
     a {

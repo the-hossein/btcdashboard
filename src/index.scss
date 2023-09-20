@@ -29,8 +29,8 @@
 }
 :root {
   --primary: #00a9ac;
-  --primary-light: #00a9ac28;
-  --bg-color: #fafafa;
+  --primary-light: #effeff;
+  --bg-color: #f7f8f9;
   --main-pen: #757575;
   --dark-gray: #585858;
   --border-color: #e2e2e2;
@@ -44,6 +44,8 @@
   --medium: "IranSans-Medium";
   --regular: "IranSans";
   --light-weight: "IranSans-Light";
+  /* font family toast */
+  --toastify-font-family: "IranSans !important";
   /* general */
   --box-shadow: 0px 4px 8px rgba(169, 169, 169, 0.11);
   --fast-transition: all 0.5s ease-out;
@@ -60,4 +62,12 @@ body {
 }
 * {
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+.Toastify__toast-body {
+  font-family: "IranSans" !important;
 }

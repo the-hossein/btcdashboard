@@ -15,7 +15,7 @@ export const MenuItems: IMenuText[] = [
   {
     id: 2,
     name: "مدیریت محتوا",
-    path: "/",
+    path: "",
     icon: (
       <>
         <InfoCircle size="22" />
@@ -24,26 +24,20 @@ export const MenuItems: IMenuText[] = [
     children: [
       {
         id: 10,
-        name: "بلاگ ها",
-        path: "/blog",
+        name: "اخبار",
+        path: "/news-list",
         icon: <Book size={22} />,
       },
       {
         id: 11,
-        name: "پست ها",
-        path: "/blog",
+        name: "مقالات",
+        path: "/blogs",
         icon: <Book size={22} />,
       },
       {
         id: 12,
-        name: "پست ها",
-        path: "/blog",
-        icon: <Book size={22} />,
-      },
-      {
-        id: 13,
-        name: "پست ها",
-        path: "/blog",
+        name: "مصاحبه",
+        path: "/interviews",
         icon: <Book size={22} />,
       },
     ],
@@ -51,7 +45,7 @@ export const MenuItems: IMenuText[] = [
   {
     id: 3,
     name: "مدیریت ارزها",
-    path: "/",
+    path: "/crypto",
     icon: (
       <>
         <InfoCircle size="22" />
@@ -61,7 +55,7 @@ export const MenuItems: IMenuText[] = [
   {
     id: 4,
     name: "مدیریت صرافی ها",
-    path: "/",
+    path: "/test",
     icon: (
       <>
         <InfoCircle size="22" />
@@ -71,17 +65,29 @@ export const MenuItems: IMenuText[] = [
   {
     id: 5,
     name: "مدیریت نطرها",
-    path: "/",
+    path: "",
     icon: (
       <>
         <InfoCircle size="22" />
       </>
     ),
+    children: [
+      {
+        id: 51,
+        name: "لیست صبح",
+        path: "/comments/list",
+        icon: (
+          <>
+            <InfoCircle size="22" />
+          </>
+        ),
+      },
+    ],
   },
   {
     id: 6,
     name: "مدیریت کاربران",
-    path: "/",
+    path: "/users",
     icon: (
       <>
         <InfoCircle size="22" />

@@ -1,38 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ITokenObject } from "../viewModel/types/IToken";
 import { GetTokenLocal } from "../services/token/Token";
 import { ResultModel } from "../viewModel/types/IApi";
 import { CallApi } from "../services/api/CallApi";
 import { GetProfile } from "../services/api/ApiRoutes";
 import { useNavigate } from "react-router-dom";
+import { IProfileUser } from "../viewModel/types/IProfile";
+import { useDispatch } from "react-redux";
+import { StatusCode } from "../viewModel/enums/StatusCode";
+import {
+  setLoader,
+  setUserProfile,
+} from "../redux/slices/UserSlice";
+import { ShowToast } from "../tools/toast/Toastify";
+import { StatusEnumToast } from "../viewModel/enums/StatusToastEnum";
+import { GetProfileMessages } from "../contents/BackendMessages";
 
 const useAuth = () => {
-  const [auth, setAuth] = useState<null>(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const authorization = async () => {
     const tokenLocal: ITokenObject = GetTokenLocal();
-    if (tokenLocal.isValid == false) {
-      setAuth(null);
+    if (tokenLocal.isValid === false) {
       navigate("/log-in");
     } else {
-      const userProfileResult: ResultModel<any> = await CallApi(
+      dispatch(setLoader(true));
+      const userProfileResult: ResultModel<IProfileUser> = await CallApi(
         GetProfile(tokenLocal?.userName),
         null,
         true,
         "GET",
         false
       );
-      console.log(userProfileResult);
       //! if success req set auth data
-      //! if failed req set auth null
+      if (userProfileResult.statusCode === StatusCode.Success) {
+        dispatch(setUserProfile(userProfileResult?.data?.data));
+      } else {
+        //! if failed req set auth null
+        ShowToast(StatusEnumToast.error, GetProfileMessages.NotRegistered);
+      }
+      dispatch(setLoader(false));
     }
   };
 
   useEffect(() => {
     authorization();
   }, []);
-
-  return [auth];
 };
 
 export default useAuth;

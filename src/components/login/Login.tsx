@@ -3,14 +3,13 @@ import { BeforeLoginContainer } from "../../tools/container/beforeLoginContainer
 import { AlignCenterContainer } from "../../tools/container/customeContainer/AlignCenterContainer";
 import { CircularProgress } from "@mui/material";
 import Logo from "../../assets/images/Asset94.png";
-
 import Style from "./Login.module.scss";
 import { ArrowLeft } from "iconsax-react";
 import { useNavigate } from "react-router-dom";
 import TextField from "../../tools/fields/textField/TextField";
 import PasswordField from "../../tools/fields/passwordField/PasswordField";
 import Button from "../../tools/button/Button";
-import { PlaceHolderContent } from "../../contents/placeHolders";
+import { PlaceHolderContent } from "../../contents/PlaceHolders";
 import { CallApi } from "../../services/api/CallApi";
 import { Login as LoginPathApi } from "../../services/api/ApiRoutes";
 import { IUserLoginResponse } from "../../viewModel/types/UserLoginTypes";
@@ -20,6 +19,7 @@ import { StatusEnumToast } from "../../viewModel/enums/StatusToastEnum";
 import { ResultModel } from "../../viewModel/types/IApi";
 import { EmptyFieldsMessage } from "../../text/Text";
 import { StatusCode } from "../../viewModel/enums/StatusCode";
+import { LoginMessages } from "../../contents/BackendMessages";
 
 const Login = () => {
   //! From Redux => user
@@ -41,7 +41,7 @@ const Login = () => {
       );
 
     if (userLoginResult.statusCode === StatusCode.Success) {
-      //ShowToast(StatusEnumToast.success, MessageToastLogin.successResponse);
+      ShowToast(StatusEnumToast.success, LoginMessages.Success);
       SaveTokenLocal(
         userLoginResult.data?.data?.token.token ?? "",
         userLoginResult.data?.data?.token.tokenExpire ?? "",
@@ -49,7 +49,9 @@ const Login = () => {
       );
       navigate("/");
     } else {
-      ShowToast(StatusEnumToast.error, userLoginResult.data?.message ?? "");
+      if (userLoginResult.statusCode === StatusCode.NotFound) {
+        ShowToast(StatusEnumToast.error, LoginMessages.NotFound);
+      }
     }
 
     setloading(false);

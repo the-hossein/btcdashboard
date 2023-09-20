@@ -30,14 +30,13 @@ const Menu = () => {
                   key={item.id}
                   name={item.name}
                   icon={item.icon}
-                  path={item.path}
                   childItem={item.children}
                   isOpen={openMenu === item.id ? true : false}
                   clickOpen={() => openMenuHandler(item.id)}
                 />
               </>
             ) : (
-              <ItemMenu key={item.id} name={item.name} icon={item.icon} />
+              <ItemMenu key={item.id} name={item.name} icon={item.icon} path={item.path} />
             )}
           </>
         ))}
