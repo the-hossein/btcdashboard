@@ -18,6 +18,10 @@ steps:
     npm ci
   displayName: 'Install Dependencies'
 - script: |
-    export CI=true
     npm run build
   displayName: 'npm  build'
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: 'build'
+    artifactName: 'drop'
+    publishLocation: 'Container'
