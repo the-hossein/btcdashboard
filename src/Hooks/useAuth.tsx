@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { ITokenObject } from "../viewModel/types/IToken";
-import { GetTokenLocal } from "../services/token/Token";
 import { ResultModel } from "../viewModel/types/IApi";
 import { CallApi } from "../services/api/CallApi";
 import { GetProfile } from "../services/api/ApiRoutes";
@@ -15,6 +14,7 @@ import {
 import { ShowToast } from "../tools/toast/Toastify";
 import { StatusEnumToast } from "../viewModel/enums/StatusToastEnum";
 import { GetProfileMessages } from "../contents/BackendMessages";
+import { GetTokenLocal } from "../services/token/Token";
 
 const useAuth = () => {
   const dispatch = useDispatch();

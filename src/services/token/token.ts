@@ -19,7 +19,7 @@ export const DeleteTokenLocal: () => void = () => {
   localStorage.removeItem(UserToken);
 };
 
-export const GetTokenLocal: () => ITokenObject = () => {
+export const GetTokenLocal  = () : ITokenObject => {
   var tokenState: ITokenObject = {
     isValid: false,
     token: "",

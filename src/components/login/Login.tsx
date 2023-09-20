@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import TextField from "../../tools/fields/textField/TextField";
 import PasswordField from "../../tools/fields/passwordField/PasswordField";
 import Button from "../../tools/button/Button";
-import { PlaceHolderContent } from "../../contents/PlaceHolders";
 import { CallApi } from "../../services/api/CallApi";
 import { Login as LoginPathApi } from "../../services/api/ApiRoutes";
 import { IUserLoginResponse } from "../../viewModel/types/UserLoginTypes";
@@ -20,6 +19,7 @@ import { ResultModel } from "../../viewModel/types/IApi";
 import { EmptyFieldsMessage } from "../../text/Text";
 import { StatusCode } from "../../viewModel/enums/StatusCode";
 import { LoginMessages } from "../../contents/BackendMessages";
+import { PlaceHolderContent } from "../../contents/PlaceHolders";
 
 const Login = () => {
   //! From Redux => user
