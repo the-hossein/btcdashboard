@@ -8,19 +8,23 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ThemeProvider } from "@mui/material";
+import { muiTheme } from "./muiTheme/MuiTheme";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <BrowserRouter>
-    <React.StrictMode>
-      <Provider store={store}>
-        <App />
-        <ToastContainer rtl={true} />
-      </Provider>
-    </React.StrictMode>
-  </BrowserRouter>
+  <ThemeProvider theme={muiTheme}>
+    <BrowserRouter>
+      <React.StrictMode>
+        <Provider store={store}>
+          <App />
+          <ToastContainer rtl={true} />
+        </Provider>
+      </React.StrictMode>
+    </BrowserRouter>
+  </ThemeProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
