@@ -7,3 +7,8 @@ export interface IMenuText {
     icon: React.ReactNode;
     children?: IMenuText[];
 }
+
+export interface IContentTypes {
+    intId: number;
+    title: string;
+}

@@ -42,7 +42,7 @@ const DynamicItemMenu: FC<IProps> = ({
         }
       });
     };
-  }, [dynamicMenuRef]);
+  }, [dynamicMenuRef, childItem]);
 
   return (
     <li className={`${Style.dyn_item}`}>

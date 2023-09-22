@@ -12,3 +12,4 @@
 // };
 
 // export default TableHocContent;
+export const row = () => console.log("first");

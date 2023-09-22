@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Style from "./Menu.module.scss";
 import Logo from "../../assets/images/Asset94.png";
-import { MenuItems } from "../../text/MenuItems";
+import MenuItems from "../../text/MenuItems";
 import ItemMenu from "./ItemMenu";
 import DynamicItemMenu from "./DynamicItemMenu";
 
 const Menu = () => {
   const [openMenu, setOpenMenu] = useState<number | null>(null);
-
+  const [menuItems] = MenuItems();
+  
   const openMenuHandler = (id: number): void => {
     if (openMenu === id) {
       setOpenMenu(null);
@@ -22,7 +23,7 @@ const Menu = () => {
         <img src={Logo} alt="logo" />
       </div>
       <ul className={`${Style.menu_list}`}>
-        {MenuItems.map((item) => (
+        {menuItems.map((item) => (
           <>
             {item?.children ? (
               <>
@@ -36,7 +37,12 @@ const Menu = () => {
                 />
               </>
             ) : (
-              <ItemMenu key={item.id} name={item.name} icon={item.icon} path={item.path} />
+              <ItemMenu
+                key={item.id}
+                name={item.name}
+                icon={item.icon}
+                path={item.path}
+              />
             )}
           </>
         ))}

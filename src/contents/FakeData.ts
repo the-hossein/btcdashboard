@@ -1,4 +1,5 @@
 export interface ITableRow {
+    [key: string]: any;
     uuid: number;
     title: string;
     date: Date;

@@ -18,10 +18,12 @@ const ItemCell: FC<IProps> = ({ value, name }) => {
         </div>
       );
 
-    case "date":
-      return <>{value instanceof Date && convertDateToPersian(value)}</>;
+    case "ReleaseTime":
+      return (
+        <>{typeof value == "string" && convertDateToPersian(new Date(value))}</>
+      );
 
-    case "isActive":
+    case "IsActive":
       return (
         <>
           {value ? (
