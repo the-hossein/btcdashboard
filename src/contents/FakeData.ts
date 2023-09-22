@@ -1,4 +1,4 @@
-interface ITable {
+export interface ITableRow {
     uuid: number;
     title: string;
     date: Date;
@@ -6,7 +6,7 @@ interface ITable {
     isActive: boolean;
 }
 
-export const TableData: ITable[] = [
+export const TableData: ITableRow[] = [
     {
         uuid: 12,
         title: "بلومبرگ: ETF اسپات بیت کوین تهدیدی برای صرافی‌ها است",
