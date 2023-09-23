@@ -1,7 +1,11 @@
 import { Book, Category, InfoCircle } from "iconsax-react";
-import { IMenuText } from "../viewModel/types/IMenuText";
-
-export const MenuItems: IMenuText[] = [
+import { IContentTypes, IMenuText } from "../viewModel/types/IMenuText";
+import { useCallback, useEffect, useState } from "react";
+import { ResultModel } from "../viewModel/types/IApi";
+import { CallApi } from "../services/api/CallApi";
+import { GetContentItems } from "../services/api/ApiRoutes";
+import { StatusCode } from "../viewModel/enums/StatusCode";
+const Menu: IMenuText[] = [
   {
     id: 1,
     name: "داشبورد",
@@ -95,3 +99,45 @@ export const MenuItems: IMenuText[] = [
     ),
   },
 ];
+
+const MenuItems = (): [IMenuText[]] => {
+  const [menuState, setMenuState] = useState<IMenuText[]>(Menu);
+
+  const getContentItemsBack = async () => {
+    const contentItemsTypes: ResultModel<IContentTypes[]> = await CallApi(
+      GetContentItems,
+      null,
+      false,
+      "GET",
+      false
+    );
+    if (contentItemsTypes.statusCode === StatusCode.Success) {
+      const children = contentItemsTypes.data?.data;
+      const newChildren = children?.map((child, index) => {
+        const newItem = {
+          id: Number(`${child.intId + index}${index}`),
+          name: child.title,
+          path: `/content/${child.intId}`,
+          icon: <Book size={22} />,
+        };
+        return newItem;
+      });
+      Menu[1].children = newChildren;
+      console.log(Menu, "menu is here");
+      setMenuState(Menu);
+    }
+  };
+
+  const cachedContent = useCallback(
+    async () => await getContentItemsBack(),
+    []
+  );
+
+  useEffect(() => {
+    cachedContent();
+  }, []);
+
+  return [menuState];
+};
+
+export default MenuItems;
