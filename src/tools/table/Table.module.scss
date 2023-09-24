@@ -29,3 +29,7 @@
     }
   }
 }
+
+.tableScroll {
+  @include Mix.style-scrollbar;
+}
