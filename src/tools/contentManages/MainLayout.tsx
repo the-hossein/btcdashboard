@@ -1,17 +1,29 @@
-import React, { FC, ReactNode } from "react";
+import React, { ChangeEvent, FC, ReactNode } from "react";
 import Style from "./MainLayout.module.scss";
 import SearchBox from "../fields/searchBox/SearchBox";
 import { PlaceHolderContent } from "../../contents/PlaceHolders";
 import { SearchNormal1 } from "iconsax-react";
 import DatePicker from "../fields/datePicker/DatePicker";
 import { Item } from "../dashboardLayout/ItemDashboard";
+import type { Value } from "react-multi-date-picker";
 
 interface IProps {
   title: string;
   children: ReactNode;
+  search: string;
+  onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+  datePicker: Value;
+  onchangeDate: (e: Value) => void;
 }
 
-const MainLayout: FC<IProps> = ({ title, children }) => {
+const MainLayout: FC<IProps> = ({
+  title,
+  children,
+  search,
+  onChangeSearch,
+  datePicker,
+  onchangeDate,
+}) => {
   return (
     <>
       <div className={`${Style.container}`}>
@@ -23,9 +35,11 @@ const MainLayout: FC<IProps> = ({ title, children }) => {
                 placeHolder={PlaceHolderContent.search}
                 icon={<SearchNormal1 size={"22"} color="var(--main-pen)" />}
                 style={{ backgroundColor: "#fff" }}
+                value={search}
+                onChangeMethod={onChangeSearch}
               />
             </Item>
-            <DatePicker />
+            <DatePicker value={datePicker} onChangeMethod={onchangeDate} />
           </div>
         </div>
         {children}
