@@ -1,7 +1,8 @@
-@use "../../../assets/Mix.scss";
-@use "../../../assets/Font.scss";
+@use "../../../../assets/Mix.scss";
+@use "../../../../assets/Font.scss";
 .asanBtc_field {
   margin: 0.25rem auto;
+  width: 100%;
   div {
     display: flex;
     align-items: center;
@@ -38,4 +39,10 @@
   .success {
     border-color: var(--success) !important;
   }
+}
+
+.error_box {
+  @include Font.Text200;
+  color: var(--error);
+  margin-top: 0 !important;
 }

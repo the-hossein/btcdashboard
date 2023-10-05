@@ -38,7 +38,7 @@ const MainTable = ({ columns, rows }: IProps) => {
 
   return (
     <>
-      <TableContainer sx={{ maxHeight: 450 }} className={style.tableScroll}>
+      <TableContainer sx={{ maxHeight: "100%" }} className={style.tableScroll}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -85,8 +85,15 @@ const MainTable = ({ columns, rows }: IProps) => {
           component="div"
           style={{ direction: "ltr" }}
           sx={{
+            height: "fit-content",
+            minHeight: "fit-content !important",
+            overflow: "auto",
             ".MuiTablePagination-actions": {
               rotate: "180deg",
+            },
+            "*": {
+              paddingTop: "0 !important",
+              paddingBottom: "0 !important",
             },
           }}
           count={rows?.length ?? 0}

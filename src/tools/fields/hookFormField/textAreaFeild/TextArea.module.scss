@@ -1,11 +1,15 @@
-@use "../../../assets/Mix.scss";
-@use "../../../assets/Font.scss";
-.asanBtc_field {
+@use "../../../../assets/Mix.scss";
+@use "../../../../assets/Font.scss";
+
+.textarea_field {
   margin: 0.25rem auto;
+  width: 100%;
+  height: auto;
   div {
     display: flex;
     align-items: center;
-
+    height: auto;
+    width: 100%;
     svg {
       color: var(--border-color);
     }
@@ -13,12 +17,14 @@
       @include Mix.lable_text;
     }
   }
-  input {
+  textarea {
     @include Font.Text300;
     @include Mix.border;
     width: 100%;
     display: block;
-    @include Mix.filed-height;
+    padding: 1rem;
+    height: 95px;
+    resize: none;
     text-align: var(--site-side);
     color: var(--main-pen);
     &::placeholder {
@@ -38,4 +44,10 @@
   .success {
     border-color: var(--success) !important;
   }
+}
+
+.error_box {
+  @include Font.Text200;
+  color: var(--error);
+  margin-top: 0 !important;
 }

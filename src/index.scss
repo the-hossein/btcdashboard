@@ -33,13 +33,14 @@
   --bg-color: #f7f8f9;
   --main-pen: #757575;
   --dark-gray: #585858;
-  --dark-icon: #292D32;
+  --dark-icon: #292d32;
   --border-color: #e2e2e2;
   --success: #12c258;
   --light: #f3f3f3;
   --error: #f21212bc;
   --light-gray: #cecece77;
   --light-pen: #eee;
+  --glass-gray: #cecece17;
   /* fonts */
   --semibold: "IranSans-SemiBold";
   --medium: "IranSans-Medium";
@@ -71,4 +72,29 @@ a {
 
 .Toastify__toast-body {
   font-family: "IranSans" !important;
+}
+
+.ck-editor {
+  color: var(--main-pen);
+  font-family: "IranSans";
+}
+
+.ck-toolbar__items {
+  * {
+    font-family: "IranSans" !important;
+  }
+  .ck-dropdown__panel_sw {
+    direction: rtl !important;    
+    text-align: right !important;
+
+  }
+}
+
+.ck-content {
+  min-height: 250px;
+}
+
+.ck-toolbar {
+  direction: rtl;
+  font-family: "IranSans";
 }

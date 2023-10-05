@@ -2,10 +2,11 @@ import React, { ChangeEvent, FC, ReactNode } from "react";
 import Style from "./MainLayout.module.scss";
 import SearchBox from "../fields/searchBox/SearchBox";
 import { PlaceHolderContent } from "../../contents/PlaceHolders";
-import { SearchNormal1 } from "iconsax-react";
+import { AddSquare, SearchNormal1 } from "iconsax-react";
 import DatePicker from "../fields/datePicker/DatePicker";
 import { Item } from "../dashboardLayout/ItemDashboard";
 import type { Value } from "react-multi-date-picker";
+import { Link, useLocation } from "react-router-dom";
 
 interface IProps {
   title: string;
@@ -24,11 +25,18 @@ const MainLayout: FC<IProps> = ({
   datePicker,
   onchangeDate,
 }) => {
+  const { pathname } = useLocation();
+
   return (
     <>
       <div className={`${Style.container}`}>
         <div className={`${Style.row_title}`}>
-          <h1>{title}</h1>
+          <div className={`${Style.navigation_help}`}>
+            <h1>{title}</h1>
+            <Link to={`${pathname}/create`}>
+            <AddSquare size="24" color="var(--main-pen)" />
+            </Link>
+          </div>
           <div className={`${Style.row_tools}`}>
             <Item width="220px">
               <SearchBox

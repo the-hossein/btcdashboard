@@ -1,0 +1,13 @@
+@use "../../assets/Mix.scss";
+@use "../../assets/Font.scss";
+
+.paper {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  background-color: white;
+  border-radius: var(--carve) !important;
+  @include Mix.border;
+  @include Mix.white_box;
+  font-family: var(--regular);
+}
