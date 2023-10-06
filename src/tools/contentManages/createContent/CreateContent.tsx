@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import ImageUpload from "../../fields/imageUpload/ImageUpload";
 import Style from "./CreateContent.module.scss";
 import TextField from "../../fields/hookFormField/textField/TextField";
@@ -10,6 +10,12 @@ import TextAreaField from "../../fields/hookFormField/textAreaFeild/TextAreaFiel
 import MenuDropDow from "../../fields/dropDown/MenuDropDow";
 import { ITableDropDown } from "../../../viewModel/types/TableTypes/IIsActiveDropDown";
 import DropDownField from "../../fields/hookFormField/dropDownField/DropDownField";
+import { ResultAuthors, ResultModel } from "../../../viewModel/types/IApi";
+import { IAuthors } from "../../../viewModel/types/IAuthors";
+import { CallApi } from "../../../services/api/CallApi";
+import { GetAuthors } from "../../../services/api/ApiRoutes";
+import { StatusCode } from "../../../viewModel/enums/StatusCode";
+import { convertToDropDown } from "../../../services/utils/CovertToDropDownObj";
 
 interface IProps {
   nameContent?: string;
@@ -36,6 +42,8 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
   const [image, setImage] = useState<File | null>(null);
   const [video, setVideo] = useState<File | null>(null);
   const [isLocation, setIsLocation] = useState<number | string>(0);
+  const [author, setAuthor] = useState<number | null>(null);
+  const [optionsAuthor, setOptionsAuthor] = useState<[] | ITableDropDown[]>([]);
 
   const optionsLocation: ITableDropDown[] = [
     { value: 0, label: "0" },
@@ -70,11 +78,32 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
     if (e.target.files && e.target.files.length) {
       const file = e.target.files[0];
       setVideo(file);
-      console.log(convertFileToUrl(file));
     }
   };
 
   const convertFileToUrl = (file: File): string => URL.createObjectURL(file);
+
+  const getAuthors = async () => {
+    const authors: ResultModel<IAuthors[]> = await CallApi(
+      GetAuthors,
+      null,
+      false,
+      "GET",
+      false
+    );
+
+    if (authors.statusCode === StatusCode.Success) {
+      const myAuthors = authors?.data?.data ?? null;
+      if (myAuthors !== null) {
+        const readyArr = convertToDropDown<IAuthors>(myAuthors);
+        setOptionsAuthor(readyArr);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getAuthors();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -148,12 +177,20 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
           />
         </Item>
         <Item width="30%" smWidth={"100%"} mdWidth={"30%"}>
-          <TextField<FormValues>
+          {/* <TextField<FormValues>
             name="author"
             control={control}
             rules={{ required: "این فیلد اجباری است" }}
             label="نویسنده"
             placeHolder="نویسنده"
+          /> */}
+          <DropDownField
+            state={author ?? ""}
+            setState={(value) => {
+              typeof value === "number" && setAuthor(value);
+            }}
+            options={optionsAuthor}
+            label="نویسنده"
           />
         </Item>
         <Item width="100%" smWidth={"100%"} mdWidth={"200%"}>

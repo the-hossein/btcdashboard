@@ -4,6 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { ITableDropDown } from "../../../../viewModel/types/TableTypes/IIsActiveDropDown";
 import Style from "./DropDown.module.scss";
+import { InputLabel } from "@mui/material";
 
 interface IProps {
   options: ITableDropDown[];
@@ -43,6 +44,9 @@ const DropDownField = ({
                 height: "46px !important",
                 direction: "rtl",
               },
+              ".MuiOutlinedInput-input" : {
+                fontSize: "12px"
+              },
               ".MuiOutlinedInput-notchedOutline ": {
                 //   border: "none !important",
                 borderColor: "var(--border-color) !important",
@@ -63,6 +67,7 @@ const DropDownField = ({
               },
             }}
             displayEmpty
+            label={label}
             inputProps={{ "aria-label": "Without label" }}
           >
             {options.map((option) => (

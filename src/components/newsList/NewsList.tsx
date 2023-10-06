@@ -40,7 +40,6 @@ const NewsList: FC<IProps> = () => {
       setTableRows(tableContent.data?.data ?? null);
       setFilteredRows(tableContent.data?.data ?? null);
       setLoader(false);
-      console.log("lunch table");
     }
 
     setLoader(false);

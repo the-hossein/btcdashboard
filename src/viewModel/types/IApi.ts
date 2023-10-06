@@ -5,7 +5,12 @@ export interface ResultModel<T> {
   statusCode: StatusCode;
 }
 export interface IResponseDataModel<T> {
-  code: StatusCode;
-  message: string;
+  code?: StatusCode;
+  message?: string;
   data: T | null;
 }
+
+export interface ResultAuthors<T> {
+  data: { data: T | null };
+  statusCode: StatusCode;
+} 

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/fa";
@@ -9,25 +9,6 @@ interface IProps {}
 
 const HtmlEditor: FC<IProps> = () => {
   const [editorData, setEditorData] = useState("");
-
-  // useEffect(() => {
-  //   const editorElement = document.querySelector("#editor") as HTMLElement;
-  //   if (editorElement) {
-  //     ClassicEditor.create(editorElement, {
-  //       plugins: [Alignment],
-  //     })
-  //       .then((editor) => {
-  //         // editor.plugins.init(Alignment);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   }
-  // }, []);
-
-  // console.log(Alignment, "Alignment")
-
-
 
   return (
     <>

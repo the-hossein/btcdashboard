@@ -14,7 +14,6 @@ class MyUploadAdapter {
       const uploadedUrl: string = file ? URL.createObjectURL(file) : "";
       return new Promise((resolve, reject) => {
         // Simulate an asynchronous upload task.
-        console.log(uploadedUrl);
         setTimeout(() => {
           resolve({ default: uploadedUrl });
         }, 2000); // اینجا شما باید واقعی‌ترین بارگذاری تصویر را پیاده‌سازی کنید.

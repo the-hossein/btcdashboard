@@ -31,10 +31,6 @@ const TextField = <T extends FieldValues>({
     fieldState: { error, isTouched, invalid },
   } = useController(props);
 
-  useEffect(() => {
-    console.log(error, isTouched, invalid, props.name);
-  }, [field]);
-
   return (
     <div className={Style.asanBtc_field}>
       <div>

@@ -31,7 +31,7 @@ const TextAreaField = <T extends FieldValues>({
   } = useController(props);
 
   useEffect(() => {
-    console.log(error, isTouched, invalid, props.name);
+    // console.log(error, isTouched, invalid, props.name);
   }, [field]);
 
   return (
