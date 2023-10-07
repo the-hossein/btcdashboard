@@ -4,16 +4,30 @@
 .container {
   width: 100%;
   height: 100%;
-  background-color: white;
-  border-radius: var(--carve) !important;
-  @include Mix.border;
-  @include Mix.white_box;
+  display: flex;
+  flex-direction: column;
+  
+  // min-height: 100%;
+  // background-color: white;
+  // border-radius: var(--carve) !important;
+  // @include Mix.border;
+  // @include Mix.white_box;
+  // padding: 16px;
+  // padding: 0%;
+}
+
+.navigation_help {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 18px;
 }
 
 .row_title {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: fit-content;
   h1 {
     @include Font.Title400;
     margin-top: 0;

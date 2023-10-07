@@ -123,7 +123,6 @@ const MenuItems = (): [IMenuText[]] => {
         return newItem;
       });
       Menu[1].children = newChildren;
-      console.log(Menu, "menu is here");
       setMenuState(Menu);
     }
   };

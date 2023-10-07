@@ -17,12 +17,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <ThemeProvider theme={muiTheme}>
     <BrowserRouter>
-      <React.StrictMode>
-        <Provider store={store}>
-          <App />
-          <ToastContainer rtl={true} />
-        </Provider>
-      </React.StrictMode>
+      {/* <React.StrictMode> */}
+      <Provider store={store}>
+        <App />
+        <ToastContainer rtl={true} />
+      </Provider>
+      {/* </React.StrictMode> */}
     </BrowserRouter>
   </ThemeProvider>
 );

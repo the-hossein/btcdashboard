@@ -6,6 +6,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import DashboardSection from "./tools/dashboardSection/DashboardSection";
 import MenuItems from "./text/MenuItems";
 import NewsList from "./components/newsList/NewsList";
+import CreateContent from "./tools/contentManages/createContent/CreateContent";
 
 function App() {
   const [menuItems] = MenuItems();
@@ -23,6 +24,7 @@ function App() {
         />
         {/* the news-list path for show news list  */}
         <Route path="/content/:id" element={<NewsList />} />
+        <Route path="/content/:id/create" element={<CreateContent />} />
       </Route>
     </Routes>
   );

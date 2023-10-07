@@ -12,7 +12,6 @@ interface IProps {
 }
 
 const DatePicker: FC<IProps> = ({ value, onChangeMethod }) => {
-  console.log(value, "value is null");
   return (
     <>
       <div className={`${Style.main_container}`}>

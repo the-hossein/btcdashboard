@@ -5,8 +5,10 @@
   height: 100%;
   position: relative;
   padding-left: 5px;
-  .scrollbar_theme{
+  .scrollbar_theme {
     @include Mix.style-scrollbar;
+    border-radius: var(--carve) !important;
+    @include Mix.border;
+    @include Mix.white_box;
   }
-
 }
