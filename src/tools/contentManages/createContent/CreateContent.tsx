@@ -138,7 +138,7 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>افزودن {nameContent ?? "خبر"}</h2>
+      <h2 className={Style.title_page} >افزودن {nameContent ?? "خبر"}</h2>
       <div className={Style.image_container}>
         <ImageUpload
           id="upload_image_1"

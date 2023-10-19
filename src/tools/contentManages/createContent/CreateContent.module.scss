@@ -1,3 +1,5 @@
+@use "../../../assets/Font.scss";
+
 .image_container {
   height: 180px;
   width: 100%;
@@ -7,4 +9,10 @@
   gap: 5rem;
   margin-top: 2rem;
   padding: 0 2rem;
+}
+
+.title_page {
+  @include Font.Title400;
+  margin-top: 0;
+  margin-bottom: 0;
 }
