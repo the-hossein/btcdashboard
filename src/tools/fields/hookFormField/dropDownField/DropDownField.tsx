@@ -4,7 +4,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { ITableDropDown } from "../../../../viewModel/types/TableTypes/IIsActiveDropDown";
 import Style from "./DropDown.module.scss";
-import { InputLabel } from "@mui/material";
 
 interface IProps {
   options: ITableDropDown[];
@@ -50,7 +49,7 @@ const DropDownField = ({
               ".MuiOutlinedInput-notchedOutline ": {
                 //   border: "none !important",
                 borderColor: "var(--border-color) !important",
-                zIndex: 1000,
+                zIndex: 80,
                 "& legend": {
                   width: "0 !important",
                 },

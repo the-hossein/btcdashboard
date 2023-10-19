@@ -1,0 +1,61 @@
+@use "../../../../assets/Mix.scss";
+@use "../../../../assets/Font.scss";
+
+.dropdown_field {
+  margin: 0.25rem auto;
+  width: 100%;
+  height: auto;
+  .container_label {
+    display: flex;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    svg {
+      color: var(--border-color);
+    }
+    span {
+      @include Mix.lable_text;
+    }
+  }
+}
+
+.error_box {
+  @include Font.Text200;
+  color: var(--error);
+  margin-top: 0 !important;
+}
+
+.main_container {
+  width: 100%;
+  @include Font.Text300;
+  @include Mix.border;
+  @include Mix.filed-height;
+  padding: 6px 12px !important;
+  text-align: var(--site-side);
+  color: var(--main-pen);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  svg {
+    cursor: pointer;
+  }
+}
+
+.date_picker {
+  width: 100%;
+  border: none;
+  @include Font.Text300;
+  input {
+    border: none;
+    outline: none;
+    @include Font.Text300;
+    appearance: none;
+    width: 100% !important;
+    &:focus {
+      border: none !important;
+      outline: none !important;
+    }
+  }
+}

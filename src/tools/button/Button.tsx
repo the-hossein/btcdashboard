@@ -5,11 +5,17 @@ interface Props {
   text: string;
   clickMethod?: () => void;
   link?: string;
+  outline?: boolean;
 }
-const Button: React.FC<Props> = ({ text, link, clickMethod }) => {
+const Button: React.FC<Props> = ({
+  text,
+  link,
+  clickMethod,
+  outline = false,
+}) => {
   return (
     <>
-      <div className={Style.button}>
+      <div className={outline ? Style.button_sec : Style.button}>
         {link != null ? (
           <Link to={link}>{text}</Link>
         ) : (

@@ -10,6 +10,7 @@ interface IProps {
   wrap: string;
   spacing: string;
   spacingX: string;
+  mt: string;
 }
 
 const Row = styled.div<Partial<IProps>>`
@@ -23,6 +24,7 @@ const Row = styled.div<Partial<IProps>>`
   flex-wrap: ${(a) => (a.wrap ? a.wrap : "wrap")};
   margin-left: ${(a) => (a.spacingX ? "-" + a.spacingX : "initial")};
   margin-right: ${(a) => (a.spacingX ? "-" + a.spacingX : "initial")};
+  margin-top: ${(a) => (a.mt ? a.mt : "initial")};
 `;
 
 export default Row;

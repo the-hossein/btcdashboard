@@ -18,9 +18,9 @@ export const Item = styled.div<IProps>`
     width: ${(a) => (a.mdWidth ? a.mdWidth : a.width)};
   }
   @media (min-width: 1024px) {
-    width: ${(a) => (a.lgWidth ? a.lgWidth : a.width)};
+    width: ${(a) => (a.lgWidth ? a.lgWidth : a.mdWidth)};
   }
   @media (min-width: 1400px) {
-    width: ${(a) => (a.xlWidth ? a.xlWidth : a.width)};
+    width: ${(a) => (a.xlWidth ? a.xlWidth : a.lgWidth)};
   }
 `;

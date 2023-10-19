@@ -5,5 +5,7 @@ export const Login: (username: string, pass: string) => string = (username, pass
 
 export const GetProfile: (username: string) => string = (username) => `api/User/GetAdminProfile?userName=${username}`
 export const GetContentItems: string = "api/Content/GetContentTypeItems";
-export const GetTableContent: string = "api/Content/GetConfirmContent?ContentType=";
+export const GetTableContent: (type: string | number, page?: string | number, perPage?: string | number) => string =
+    (type, page, perPage) => `api/Content/GetConfirmContent?ContentType=${type}${(typeof page === "number" || typeof page === "string") && "&Page=" + page}${perPage && "&PerPage=" + perPage}`;
 export const GetAuthors: string = "api/User/GetAuthors";
+export const GetLabels: string = "api/Content/GetContentTags";

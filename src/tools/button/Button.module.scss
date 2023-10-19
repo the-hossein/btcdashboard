@@ -5,3 +5,9 @@
     @include Mix.primary-btn;
   }
 }
+.button_sec {
+  a {
+    @include Mix.filed-height;
+    @include Mix.accent-btn ;
+  }
+}

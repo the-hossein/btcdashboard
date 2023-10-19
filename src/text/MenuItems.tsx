@@ -9,6 +9,7 @@ const Menu: IMenuText[] = [
   {
     id: 1,
     name: "داشبورد",
+    unid: 2231313,
     path: "/",
     icon: (
       <>
@@ -20,6 +21,7 @@ const Menu: IMenuText[] = [
     id: 2,
     name: "مدیریت محتوا",
     path: "",
+    unid: 2231313,
     icon: (
       <>
         <InfoCircle size="22" />
@@ -31,24 +33,28 @@ const Menu: IMenuText[] = [
         name: "اخبار",
         path: "/news-list",
         icon: <Book size={22} />,
+        unid: 2231313,
       },
       {
         id: 11,
         name: "مقالات",
         path: "/blogs",
         icon: <Book size={22} />,
+        unid: 2231313,
       },
       {
         id: 12,
         name: "مصاحبه",
         path: "/interviews",
         icon: <Book size={22} />,
+        unid: 2231313,
       },
     ],
   },
   {
     id: 3,
     name: "مدیریت ارزها",
+    unid: 2231313,
     path: "/crypto",
     icon: (
       <>
@@ -59,6 +65,7 @@ const Menu: IMenuText[] = [
   {
     id: 4,
     name: "مدیریت صرافی ها",
+    unid: 2231313,
     path: "/test",
     icon: (
       <>
@@ -69,6 +76,7 @@ const Menu: IMenuText[] = [
   {
     id: 5,
     name: "مدیریت نطرها",
+    unid: 2231313,
     path: "",
     icon: (
       <>
@@ -79,6 +87,7 @@ const Menu: IMenuText[] = [
       {
         id: 51,
         name: "لیست صبح",
+        unid: 2231313,
         path: "/comments/list",
         icon: (
           <>
@@ -92,6 +101,7 @@ const Menu: IMenuText[] = [
     id: 6,
     name: "مدیریت کاربران",
     path: "/users",
+    unid: 2231313,
     icon: (
       <>
         <InfoCircle size="22" />
@@ -116,6 +126,7 @@ const MenuItems = (): [IMenuText[]] => {
       const newChildren = children?.map((child, index) => {
         const newItem = {
           id: Number(`${child.intId + index}${index}`),
+          unid: child.intId,
           name: child.title,
           path: `/content/${child.intId}`,
           icon: <Book size={22} />,

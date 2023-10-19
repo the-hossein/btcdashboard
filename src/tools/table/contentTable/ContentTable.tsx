@@ -10,18 +10,31 @@ const HeaderTableContent = (): [
   string | number
 ] => {
   const [isActive, setIsActive] = useState<number | string>(2);
-  const [isLocation, setIsLocation] = useState<number | string>(2);
+  const [isLocation, setIsLocation] = useState<number | string>(9);
   const optionsDropDown: ITableDropDown[] = [
     { value: 2, label: "همه وضعیت ها" },
     { value: 1, label: "تایید شده" },
     { value: 0, label: "تایید نشده" },
   ];
 
+  // const optionsLocation: ITableDropDown[] = [
+  //   { value: 1, label: "خبر" },
+  //   { value: 0, label: "زئوس" },
+  // ];
+
   const optionsLocation: ITableDropDown[] = [
-    { value: 2, label: "مکان محتوا" },
-    { value: 1, label: "خبر" },
-    { value: 0, label: "زئوس" },
+    { value: 9, label: "مکان محتوا" },
+    { value: 0, label: "0" },
+    { value: 1, label: "1" },
+    { value: 2, label: "2" },
+    { value: 3, label: "3" },
+    { value: 4, label: "4" },
+    { value: 5, label: "5" },
+    { value: 6, label: "6" },
+    { value: 7, label: "7" },
+    { value: 8, label: "8" },
   ];
+
 
   const columns: ITableColumns[] = [
     {

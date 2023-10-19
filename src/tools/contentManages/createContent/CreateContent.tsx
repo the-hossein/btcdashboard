@@ -13,9 +13,16 @@ import DropDownField from "../../fields/hookFormField/dropDownField/DropDownFiel
 import { ResultAuthors, ResultModel } from "../../../viewModel/types/IApi";
 import { IAuthors } from "../../../viewModel/types/IAuthors";
 import { CallApi } from "../../../services/api/CallApi";
-import { GetAuthors } from "../../../services/api/ApiRoutes";
+import { GetAuthors, GetLabels } from "../../../services/api/ApiRoutes";
 import { StatusCode } from "../../../viewModel/enums/StatusCode";
 import { convertToDropDown } from "../../../services/utils/CovertToDropDownObj";
+import { ILabels } from "../../../viewModel/types/ILabels";
+import CheckField from "../../fields/hookFormField/checkField/CheckField";
+import Button from "../../button/Button";
+import { Autocomplete, SelectChangeEvent } from "@mui/material";
+import MultiDropDownField from "../../fields/hookFormField/multiDropDownField/MultiDropDownField";
+import DatePicker from "../../fields/datePicker/DatePicker";
+import DatePickerField from "../../fields/hookFormField/datePickerField/DatePickerField";
 
 interface IProps {
   nameContent?: string;
@@ -43,7 +50,9 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
   const [video, setVideo] = useState<File | null>(null);
   const [isLocation, setIsLocation] = useState<number | string>(0);
   const [author, setAuthor] = useState<number | null>(null);
+  const [labelSelect, setLabelSelect] = useState<ITableDropDown[] | []>([]);
   const [optionsAuthor, setOptionsAuthor] = useState<[] | ITableDropDown[]>([]);
+  const [optionsLabels, setOptionsLabels] = useState<[] | ITableDropDown[]>([]);
 
   const optionsLocation: ITableDropDown[] = [
     { value: 0, label: "0" },
@@ -101,8 +110,30 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
     }
   };
 
+  const getLabels = async () => {
+    const labels: ResultModel<ILabels[]> = await CallApi(
+      GetLabels,
+      null,
+      false,
+      "GET",
+      false
+    );
+
+    if (labels.statusCode === StatusCode.Success) {
+      console.log(labels);
+      const arrayLabels = labels.data?.data ?? null;
+      if (arrayLabels !== null) {
+        const labelsDropdown: ITableDropDown[] = arrayLabels.map((item) => {
+          return { label: item.text, value: item.value };
+        });
+        setOptionsLabels(labelsDropdown);
+      }
+    }
+  };
+
   useEffect(() => {
     getAuthors();
+    getLabels();
   }, []);
 
   return (
@@ -131,7 +162,7 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
       </div>
 
       <Row w={"100%"} items="center" justify="space-between">
-        <Item width="30%" smWidth={"100%"} mdWidth={"30%"}>
+        <Item width="100%" smWidth={"100%"} mdWidth={"30%"}>
           <TextField<FormValues>
             name="image_text"
             control={control}
@@ -140,7 +171,7 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
             placeHolder="متن جایگذین عکس"
           />
         </Item>
-        <Item width="30%" smWidth={"100%"} mdWidth={"30%"}>
+        <Item width="100%" smWidth={"100%"} mdWidth={"30%"}>
           <TextField<FormValues>
             name="seo_title"
             control={control}
@@ -149,7 +180,7 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
             label="عنوان سئو"
           />
         </Item>
-        <Item width="30%" smWidth={"100%"} mdWidth={"30%"}>
+        <Item width="100%" smWidth={"100%"} mdWidth={"30%"}>
           <TextField<FormValues>
             name="key_words"
             control={control}
@@ -158,7 +189,7 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
             placeHolder="کلمات کلیدی"
           />
         </Item>
-        <Item width="30%" smWidth={"100%"} mdWidth={"30%"}>
+        <Item width="100%" smWidth={"100%"} mdWidth={"30%"}>
           <TextField<FormValues>
             name="title_fa"
             control={control}
@@ -167,7 +198,7 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
             placeHolder="تیتر خبر (فارسی)"
           />
         </Item>
-        <Item width="30%" smWidth={"100%"} mdWidth={"30%"}>
+        <Item width="100%" smWidth={"100%"} mdWidth={"30%"}>
           <TextField<FormValues>
             name="title_en"
             control={control}
@@ -176,14 +207,7 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
             label="تیتر خبر (انگلیسی)"
           />
         </Item>
-        <Item width="30%" smWidth={"100%"} mdWidth={"30%"}>
-          {/* <TextField<FormValues>
-            name="author"
-            control={control}
-            rules={{ required: "این فیلد اجباری است" }}
-            label="نویسنده"
-            placeHolder="نویسنده"
-          /> */}
+        <Item width="100%" smWidth={"100%"} mdWidth={"30%"}>
           <DropDownField
             state={author ?? ""}
             setState={(value) => {
@@ -193,7 +217,7 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
             label="نویسنده"
           />
         </Item>
-        <Item width="100%" smWidth={"100%"} mdWidth={"200%"}>
+        <Item width="100%" smWidth={"100%"} mdWidth={"100%"}>
           <TextAreaField<FormValues>
             name="author"
             control={control}
@@ -215,11 +239,8 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
           <HtmlEditor />
         </Item>
       </Row>
-      <Row w="100%" items="center" justify="flex-start" gapX="1rem">
-        {/* 
-  advertisement_place: number;
-  label: string[]; */}
-        <Item width="30%" smWidth="100%">
+      <Row w="100%" items="center" justify="space-between">
+        <Item width="100%" smWidth="100%" mdWidth={"30%"}>
           <TextField<FormValues>
             name="short_link"
             control={control}
@@ -228,7 +249,7 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
             placeHolder="لینک کوتاه"
           />
         </Item>
-        <Item width="30%" smWidth="100%">
+        <Item width="100%" smWidth="100%" mdWidth={"30%"}>
           <TextField<FormValues>
             name="source_link"
             control={control}
@@ -237,7 +258,7 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
             placeHolder="لینک منبع"
           />
         </Item>
-        <Item width="30%" smWidth="100%">
+        <Item width="100%" smWidth="100%" mdWidth={"30%"}>
           <TextField<FormValues>
             name="source_title"
             control={control}
@@ -246,61 +267,95 @@ const CreateContent: FC<IProps> = ({ nameContent }) => {
             placeHolder="عنوان منبع"
           />
         </Item>
-        <Item width="30%" smWidth="100%">
-          <TextField<FormValues>
-            name="date_reals"
-            control={control}
-            rules={{ required: "این فیلد اجباری است" }}
+        <Item width="100%" smWidth="100%" mdWidth={"30%"}>
+          <DatePickerField
+            value={""}
+            onChangeMethod={(e) => console.log(e)}
+            // name="date_reals"
+            // control={control}
+            // rules={{ required: "این فیلد اجباری است" }}
             label="تاریخ انتشار"
-            placeHolder="تاریخ انتشار"
+            placeholder="تاریخ انتشار"
           />
         </Item>
-        <Item width="30%" smWidth="100%">
-          <TextField<FormValues>
-            name="expire_date"
-            control={control}
-            rules={{ required: "این فیلد اجباری است" }}
+        <Item width="100%" smWidth="100%" mdWidth={"30%"}>
+          <DatePickerField
+            // name="expire_date"
+            // control={control}
+            // rules={{ required: "این فیلد اجباری است" }}
+            value={""}
+            onChangeMethod={(e) => console.log(e)}
             label="تاریخ انقضا"
-            placeHolder="تاریخ انقضا"
+            placeholder="تاریخ انقضا"
           />
         </Item>
-        <Item width="30%" smWidth="100%">
-          {/* <TextField<FormValues>
-            name="show_place"
-            control={control}
-            rules={{ required: "این فیلد اجباری است" }}
-            label="مکان نمایش محتوا"
-            placeHolder="مکان نمایش محتوا"
-          /> */}
+        <Item width="100%" smWidth="100%" mdWidth={"30%"}>
           <DropDownField
             state={isLocation}
             setState={(value) => {
-              setIsLocation(value);
+              (typeof value === "string" || typeof value === "string") &&
+                setIsLocation(value);
             }}
             options={optionsLocation}
             label="مکان نمایش محتوا"
           />
         </Item>
-        <Item width="30%" smWidth="100%">
-          <TextField<FormValues>
-            name="advertisement_place"
-            control={control}
-            rules={{ required: "این فیلد اجباری است" }}
-            label="مکان تبلیغ"
-            placeHolder="مکان تبلیغ"
+        <Row w="100%" items="center" justify="flex-start" gapX={"4.66666%"}>
+          <Item width="100%" smWidth="100%" mdWidth={"30%"}>
+            <TextField<FormValues>
+              name="advertisement_place"
+              control={control}
+              rules={{ required: "این فیلد اجباری است" }}
+              label="مکان تبلیغ"
+              placeHolder="مکان تبلیغ"
+            />
+          </Item>
+          <Item width="100%" smWidth="100%" mdWidth={"30%"}>
+            <MultiDropDownField
+              value={labelSelect}
+              onChange={(event, newValue) => {
+                setLabelSelect([...newValue]);
+              }}
+              options={optionsLabels}
+              label="برچسب"
+              limitTag={1}
+              placeholder="برچسب ها"
+              id="labelSelect_multi"
+            />
+          </Item>
+        </Row>
+      </Row>
+      <Row w={"100%"} mt="1rem" justify={"space-between"} items={"center"}>
+        <CheckField label="تایید شده" />
+        <CheckField label="ارسال در تلگرام" />
+        <CheckField label="علاقه مندی ها" />
+        <CheckField label="نمایش نویسنده" />
+      </Row>
+      <Row
+        w={"100%"}
+        mt="2rem"
+        justify={"flex-end"}
+        gapX="1rem"
+        items={"center"}
+      >
+        <Item width="100%" mdWidth="30%">
+          <Button
+            outline={true}
+            text={"ارسال خبرنامه"}
+            clickMethod={() => console.log("first")}
           />
         </Item>
-        <Item width="30%" smWidth="100%">
-          <TextField<FormValues>
-            name="label"
-            control={control}
-            rules={{ required: "این فیلد اجباری است" }}
-            label="برچسب"
-            placeHolder="برچسب"
+        <Item width="100%" mdWidth="30%">
+          <Button
+            outline={true}
+            text={"ارسال در تلگرام"}
+            clickMethod={() => console.log("first")}
           />
+        </Item>
+        <Item width="100%" mdWidth="20%">
+          <Button text={"انتشار"} clickMethod={() => console.log("first")} />
         </Item>
       </Row>
-      <button type="submit">acc</button>
     </form>
   );
 };
