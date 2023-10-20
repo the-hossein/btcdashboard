@@ -4,7 +4,7 @@ export interface ICreateContentRequest {
     lead: string;
     contentText: string;
     picFile: string;
-    releaseTime: Date;
+    releaseTime: Date | null;
     label: string;
     favorite: boolean;
     visitNo: number;
@@ -14,19 +14,20 @@ export interface ICreateContentRequest {
     files: string;
     sourceTitle: string;
     sourceLink: string;
-    authorUserAccountId: number;
+    authorUserAccountId: number | null;
     likeNum: number;
     disLikeNum: number;
-    insertDate: Date;
-    lastUpdate: Date;
+    insertDate: Date | string | null;
+    lastUpdate: Date | string | null;
     videoFile: string;
     voiceFile: string;
-    expireDate: Date;
-    newsPaper: true,
+    expireDate: Date | null;
+    newsPaper: boolean,
     picAlt: string;
     keyword: string;
     title: string;
     adLocation: number;
     englishTitr: string;
     showLocation: number;
+    showAuthor: boolean;
 }

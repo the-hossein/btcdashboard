@@ -1,13 +1,33 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { TickCircle } from "iconsax-react";
+import {
+  useController,
+  UseControllerProps,
+  FieldValues,
+  Control,
+} from "react-hook-form";
 
-interface IProps {
+interface IProps<T extends FieldValues> {
   label?: string;
   defaultChecked?: boolean;
+  control: Control<T, object>;
 }
 
-const CheckField = ({ label, defaultChecked = false }: IProps) => {
+type CombinedProps<T extends FieldValues> = IProps<T> &
+  UseControllerProps<T> &
+  InputHTMLAttributes<HTMLInputElement>;
+
+const CheckField = <T extends FieldValues>({
+  label,
+  defaultChecked = false,
+  ...props
+}: CombinedProps<T>) => {
+  const {
+    field,
+    fieldState: { error, isTouched, invalid },
+  } = useController(props);
+
   return (
     <>
       <FormControlLabel
@@ -23,6 +43,8 @@ const CheckField = ({ label, defaultChecked = false }: IProps) => {
           <Checkbox
             color="primary"
             icon={<TickCircle />}
+            checked={field.value}
+            {...field}
             checkedIcon={<TickCircle variant="Bold" />}
             defaultChecked={defaultChecked}
           />

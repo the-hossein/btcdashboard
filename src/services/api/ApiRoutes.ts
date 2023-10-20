@@ -6,6 +6,10 @@ export const Login: (username: string, pass: string) => string = (username, pass
 export const GetProfile: (username: string) => string = (username) => `api/User/GetAdminProfile?userName=${username}`
 export const GetContentItems: string = "api/Content/GetContentTypeItems";
 export const GetTableContent: (type: string | number, page?: string | number, perPage?: string | number) => string =
-    (type, page, perPage) => `api/Content/GetConfirmContent?ContentType=${type}${(typeof page === "number" || typeof page === "string") && "&Page=" + page}${perPage && "&PerPage=" + perPage}`;
+    (type, page, perPage) => `api/Content/GetConfirmContent?ContentType=${type}${(typeof page === "number" || typeof page === "string") && "&PageNumber=" + page}${perPage && "&Count=" + perPage}`;
 export const GetAuthors: string = "api/User/GetAuthors";
 export const GetLabels: string = "api/Content/GetContentTags";
+
+export const CreateContentUrl: string = "api/Content/CreateContent";
+
+

@@ -3,7 +3,7 @@ import Style from "./Button.module.scss";
 import { Link } from "react-router-dom";
 interface Props {
   text: string;
-  clickMethod?: () => void;
+  clickMethod?: (e: React.MouseEvent<HTMLElement> ) => void;
   link?: string;
   outline?: boolean;
 }

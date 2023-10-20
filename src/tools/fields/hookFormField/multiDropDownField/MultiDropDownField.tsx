@@ -1,29 +1,44 @@
 import { Autocomplete, FormControl, TextField } from "@mui/material";
-import React, { FC, ReactElement } from "react";
+import React, { FC, InputHTMLAttributes, ReactElement } from "react";
 import { ITableDropDown } from "../../../../viewModel/types/TableTypes/IIsActiveDropDown";
 import Style from "./MultiDropDown.module.scss";
+import {
+  useController,
+  UseControllerProps,
+  FieldValues,
+  Control,
+} from "react-hook-form";
 
-interface IProps {
+interface IProps<T extends FieldValues> {
   limitTag?: number;
   id?: string;
   label?: string;
   icon?: ReactElement;
   placeholder?: string;
   options: ITableDropDown[] | [];
-  value: ITableDropDown[];
-  onChange: (event?: React.ChangeEvent<{}>, newValue?: any) => void;
+  // value: ITableDropDown[];
+  // onChange: (event?: React.ChangeEvent<{}>, newValue?: any) => void;
+  control: Control<T, object>;
 }
 
-const MultiDropDownField: FC<IProps> = ({
+type CombinedProps<T extends FieldValues> = IProps<T> &
+  UseControllerProps<T> &
+  InputHTMLAttributes<HTMLInputElement>;
+
+const MultiDropDownField = <T extends FieldValues>({
   limitTag = 2,
   id = "multiple-limit-tags",
   options,
   label,
   icon,
   placeholder,
-  value,
-  onChange,
-}) => {
+  ...props
+}: CombinedProps<T>) => {
+  const {
+    field,
+    fieldState: { error, isTouched, invalid },
+  } = useController(props);
+
   return (
     <>
       <div className={Style.dropdown_field}>
@@ -39,7 +54,6 @@ const MultiDropDownField: FC<IProps> = ({
             id={id}
             options={options}
             getOptionLabel={(option) => option.label}
-            value={value}
             renderInput={(params) => (
               <TextField
                 sx={{
@@ -59,13 +73,16 @@ const MultiDropDownField: FC<IProps> = ({
                 }}
                 {...params}
                 label={""}
-                placeholder={value.length <= 0 ? placeholder : ""}
+                placeholder={field.value.length > 0 ? "" : placeholder}
+                inputRef={field.ref}
+                {...field}
               />
             )}
-            onChange={onChange}
+            onChange={(e, newValues) => {
+              field.onChange(newValues);
+            }}
             sx={{
               width: "100%",
-              //   height: "46px !important",
               ".MuiInputBase-root": {
                 width: "100%",
                 direction: "rtl",
@@ -77,7 +94,14 @@ const MultiDropDownField: FC<IProps> = ({
               },
               ".MuiOutlinedInput-notchedOutline ": {
                 //   border: "none !important",
-                borderColor: "var(--border-color) !important",
+                borderColor:
+                  !invalid && isTouched
+                    ? "var(--success) !important"
+                    : invalid && isTouched
+                    ? "var(--error) !important"
+                    : invalid
+                    ? "var(--error) !important"
+                    : "var(--border-color) !important",
                 zIndex: 80,
                 "& legend": {
                   width: "0 !important",
@@ -104,7 +128,7 @@ const MultiDropDownField: FC<IProps> = ({
             }}
           />
         </FormControl>
-        <p className={Style.error_box}></p>
+        <p className={Style.error_box}>{error?.message ?? ""}</p>
       </div>
     </>
   );
