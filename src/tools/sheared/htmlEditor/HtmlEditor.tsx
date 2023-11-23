@@ -3,23 +3,24 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/fa";
 import MyUploadAdapter from "./MyUploadAdaptor";
-import { Alignment, AlignmentEditing, AlignmentUI } from "@ckeditor/ckeditor5-alignment";
+import {
+  Alignment,
+  AlignmentEditing,
+  AlignmentUI,
+} from "@ckeditor/ckeditor5-alignment";
 
-interface IProps {}
+interface IProps {
+  editorData: string;
+  setEditorData: (e: string) => void;
+}
 
-const HtmlEditor: FC<IProps> = () => {
-  const [editorData, setEditorData] = useState("");
-
+const HtmlEditor: FC<IProps> = ({ editorData, setEditorData }) => {
   return (
     <>
       <CKEditor
         editor={ClassicEditor}
         config={{
           language: "fa",
-          // alignment: {
-          //   options: ["left", "center", "right", "justify"],
-          // },
-          // plugins: [Alignment],
           toolbar: {
             items: [
               "heading",
@@ -31,12 +32,6 @@ const HtmlEditor: FC<IProps> = () => {
               "bulletedList",
               "numberedList",
               "blockQuote",
-              "|",
-              "|",
-              "alignment:left", // دکمه چپ چین
-              "alignment:right", // دکمه چپ چین
-              // "alignCenter", // دکمه وسط چین
-              // "alignRight", // دکمه راست چین
               "|",
               "imageUpload", // افزودن دکمه بارگذاری تصاویر
               "undo",

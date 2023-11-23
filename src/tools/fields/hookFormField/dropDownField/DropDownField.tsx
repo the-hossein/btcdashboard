@@ -1,28 +1,38 @@
-import React, { FC, ReactElement } from "react";
+import React, { InputHTMLAttributes, ReactElement } from "react";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import { ITableDropDown } from "../../../../viewModel/types/TableTypes/IIsActiveDropDown";
 import Style from "./DropDown.module.scss";
-import { InputLabel } from "@mui/material";
+import {
+  useController,
+  UseControllerProps,
+  FieldValues,
+  Control,
+} from "react-hook-form";
 
-interface IProps {
+interface IProps<T extends FieldValues> {
   options: ITableDropDown[];
-  state: string | number;
-  setState: (e: string | number) => void;
   icon?: ReactElement;
   label?: string;
-  error?: string;
+  control: Control<T, object>;
 }
 
-const DropDownField = ({
+type CombinedProps<T extends FieldValues> = IProps<T> &
+  UseControllerProps<T> &
+  InputHTMLAttributes<HTMLInputElement>;
+
+const DropDownField = <T extends FieldValues>({
   options,
-  state,
-  setState,
   icon,
   label,
-  error,
-}: IProps) => {
+  ...props
+}: CombinedProps<T>) => {
+  const {
+    field,
+    fieldState: { error, isTouched, invalid },
+  } = useController(props);
+
   return (
     <>
       <div className={Style.dropdown_field}>
@@ -32,10 +42,7 @@ const DropDownField = ({
         </div>
         <FormControl fullWidth>
           <Select
-            value={`${state}`}
-            onChange={(e: SelectChangeEvent) => {
-              setState(e.target.value);
-            }}
+            {...field}
             sx={{
               width: "100%",
               height: "46px !important",
@@ -44,13 +51,19 @@ const DropDownField = ({
                 height: "46px !important",
                 direction: "rtl",
               },
-              ".MuiOutlinedInput-input" : {
-                fontSize: "12px"
+              ".MuiOutlinedInput-input": {
+                fontSize: "12px",
               },
               ".MuiOutlinedInput-notchedOutline ": {
                 //   border: "none !important",
-                borderColor: "var(--border-color) !important",
-                zIndex: 1000,
+                borderColor: !invalid && isTouched
+                ? "var(--success) !important"
+                : invalid && isTouched
+                ? "var(--error) !important"
+                : invalid
+                ? "var(--error) !important"
+                : "var(--border-color) !important",
+                zIndex: 80,
                 "& legend": {
                   width: "0 !important",
                 },
@@ -75,7 +88,7 @@ const DropDownField = ({
             ))}
           </Select>
         </FormControl>
-        <p className={Style.error_box}>{error ?? ""}</p>
+        <p className={Style.error_box}>{error?.message ?? ""}</p>
       </div>
     </>
   );

@@ -11,10 +11,13 @@ import { StatusCode } from "../../viewModel/enums/StatusCode";
 import TableSkeleton from "../../tools/table/TableSkeleton";
 import type { Value } from "react-multi-date-picker";
 import { getTimeStamp } from "../../tools/table/UtiltyTable";
+import MenuItems from "../../text/MenuItems";
+import { fundedMenu } from "../../services/utils/FindMenuListTitle";
 
 interface IProps {}
 
 const NewsList: FC<IProps> = () => {
+  const [menuItems] = MenuItems();
   const [columns, activeStatus, locationStatus] = HeaderTableContent();
   const params = useParams();
   const [loader, setLoader] = useState<boolean>(false);
@@ -25,11 +28,14 @@ const NewsList: FC<IProps> = () => {
     null
   );
 
+  const [rowsPerPage, setRowsPerPage] = useState<number>(20);
+  const [page, setPage] = useState<number>(0);
+
   const getTableContentBack = async () => {
     setLoader(true);
 
     const tableContent: ResultModel<ITableContentRow[]> = await CallApi(
-      GetTableContent + params.id,
+      GetTableContent(params.id ?? "1", page, rowsPerPage),
       null,
       false,
       "GET",
@@ -47,7 +53,7 @@ const NewsList: FC<IProps> = () => {
 
   useEffect(() => {
     getTableContentBack();
-  }, [params]);
+  }, [params, page, rowsPerPage]);
 
   useEffect(() => {
     if (tableRows !== null) {
@@ -85,7 +91,10 @@ const NewsList: FC<IProps> = () => {
   return (
     <>
       <MainLayout
-        title="لیست اخبار"
+        title={fundedMenu(
+          Array.isArray(menuItems[1].children) ? menuItems[1].children : [],
+          params?.id ? +params?.id : 0
+        )}
         search={search}
         onChangeSearch={(e) => setSearch(e.target.value)}
         datePicker={datePicker}
@@ -96,7 +105,14 @@ const NewsList: FC<IProps> = () => {
         {loader ? (
           <TableSkeleton />
         ) : (
-          <MainTable columns={columns} rows={filteredRows} />
+          <MainTable
+            columns={columns}
+            rows={filteredRows}
+            page={page}
+            setPage={setPage}
+            rowsPerPage={rowsPerPage}
+            setRowsPerPage={setRowsPerPage}
+          />
         )}
       </MainLayout>
     </>

@@ -14,12 +14,22 @@ import style from "./Table.module.scss";
 interface IProps {
   columns: ITableColumns[];
   rows: ITableContentRow[] | null;
+  page: number;
+  setPage: (num: number) => void;
+  rowsPerPage: number;
+  setRowsPerPage: (num: number) => void;
+  pageCount?: number;
 }
 
-const MainTable = ({ columns, rows }: IProps) => {
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const [page, setPage] = useState<number>(0);
-
+const MainTable = ({
+  columns,
+  rows,
+  page,
+  rowsPerPage,
+  setPage,
+  setRowsPerPage,
+  pageCount = 100,
+}: IProps) => {
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -30,11 +40,6 @@ const MainTable = ({ columns, rows }: IProps) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-  useEffect(() => {
-    setRowsPerPage(10);
-    setPage(0);
-  }, [rows?.length]);
 
   return (
     <>
@@ -55,27 +60,17 @@ const MainTable = ({ columns, rows }: IProps) => {
           </TableHead>
           <TableBody>
             {rows !== null &&
-              rows
-                ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                ?.map((row) => (
-                  <TableRow
-                    hover
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={row?.IntID}
-                  >
-                    {columns.map((column) => {
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          <ItemCell
-                            value={row[column.name]}
-                            name={column.name}
-                          />
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                ))}
+              rows?.map((row) => (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row?.IntID}>
+                  {columns.map((column) => {
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        <ItemCell value={row[column.name]} id={row.IntID} name={column.name} />
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -85,9 +80,11 @@ const MainTable = ({ columns, rows }: IProps) => {
           component="div"
           style={{ direction: "ltr" }}
           sx={{
-            height: "fit-content",
-            minHeight: "fit-content !important",
-            overflow: "auto",
+            // height: "fit-content",
+            // minHeight: "fit-content !important",
+            // overflow: "auto",
+            overflow: "initial !important" ,
+            // ".MuiTablePagination-root": { overflow: "initial !important" },
             ".MuiTablePagination-actions": {
               rotate: "180deg",
             },
@@ -96,7 +93,7 @@ const MainTable = ({ columns, rows }: IProps) => {
               paddingBottom: "0 !important",
             },
           }}
-          count={rows?.length ?? 0}
+          count={pageCount ?? 100}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

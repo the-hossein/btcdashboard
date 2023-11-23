@@ -1,0 +1,26 @@
+@use "../../../../assets/Mix.scss";
+@use "../../../../assets/Font.scss";
+
+.dropdown_field {
+  margin: 0.25rem auto;
+  width: 100%;
+  height: auto;
+  .container {
+    display: flex;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    svg {
+      color: var(--border-color);
+    }
+    span {
+      @include Mix.lable_text;
+    }
+  }
+}
+
+.error_box {
+  @include Font.Text200;
+  color: var(--error);
+  margin-top: 0 !important;
+}

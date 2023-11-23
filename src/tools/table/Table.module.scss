@@ -5,6 +5,11 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+  a {
+    width: fit-content;
+    height: fit-content;
+    line-height: 0% !important;
+  }
   svg {
     &:hover {
       cursor: pointer;
